@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NovaCode Studio · Desarrollo web profesional</title>
+<meta name="description" content="Diseñamos y desarrollamos sitios web, tiendas online y aplicaciones web a medida para empresas en Latinoamérica." />
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<script>
+tailwind.config = { theme: { extend: {
+  fontFamily: { sans: ['Inter','system-ui','sans-serif'] },
+  colors: { brand: { 50:'#eef2ff',100:'#e0e7ff',400:'#818cf8',500:'#6366f1',600:'#4f46e5',700:'#4338ca' }, ink: '#0b1020' }
+}}}
+</script>
+<style>
+  html{scroll-behavior:smooth}
+  .grid-bg{background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:44px 44px}
+  details summary::-webkit-details-marker{display:none}
+  details[open] .chev{transform:rotate(45deg)}
+</style>
+</head>
+<body class="font-sans text-slate-700 bg-white antialiased">
+
+<!-- Aviso de marcador -->
+<div class="bg-amber-100 text-amber-900 text-xs text-center py-2 px-4">
+  Maqueta de ejemplo · “NovaCode Studio”, proyectos, testimonios, precios y datos de contacto son <strong>marcadores de posición</strong>.
+</div>
+
+<!-- Header -->
+<header class="sticky top-0 z-40 bg-ink/90 backdrop-blur border-b border-white/10">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 h-16 flex items-center justify-between">
+    <a href="#" class="flex items-center gap-2 text-white font-bold text-lg">
+      <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-500 to-cyan-400 grid place-items-center text-sm">&lt;/&gt;</span>
+      NovaCode<span class="text-brand-400">Studio</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-8 text-sm text-slate-300">
+      <a href="#servicios" class="hover:text-white">Servicios</a>
+      <a href="#proceso" class="hover:text-white">Proceso</a>
+      <a href="#proyectos" class="hover:text-white">Proyectos</a>
+      <a href="#planes" class="hover:text-white">Planes</a>
+      <a href="#faq" class="hover:text-white">Preguntas</a>
+    </nav>
+    <a href="#contacto" class="hidden sm:inline-flex items-center rounded-lg bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold px-4 py-2">Solicita una cotización</a>
+    <button id="menuBtn" class="md:hidden text-white p-2" aria-label="Abrir menú">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+  <div id="mobileNav" class="hidden md:hidden border-t border-white/10 px-5 py-4 space-y-3 text-slate-300">
+    <a href="#servicios" class="block">Servicios</a><a href="#proceso" class="block">Proceso</a><a href="#proyectos" class="block">Proyectos</a><a href="#planes" class="block">Planes</a><a href="#faq" class="block">Preguntas</a>
+    <a href="#contacto" class="block text-center rounded-lg bg-brand-500 text-white font-semibold py-2">Solicita una cotización</a>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="relative overflow-hidden bg-ink text-white">
+  <div class="absolute inset-0 grid-bg"></div>
+  <div class="absolute -top-40 -right-40 w-[36rem] h-[36rem] rounded-full bg-brand-600/30 blur-3xl"></div>
+  <div class="absolute -bottom-40 -left-40 w-[30rem] h-[30rem] rounded-full bg-cyan-500/20 blur-3xl"></div>
+  <div class="relative max-w-7xl mx-auto px-5 lg:px-8 py-20 lg:py-28 grid lg:grid-cols-2 gap-14 items-center">
+    <div>
+      <span class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-slate-300">
+        <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Agenda abierta para nuevos proyectos
+      </span>
+      <h1 class="mt-6 text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight">
+        Sitios web que <span class="bg-gradient-to-r from-brand-400 to-cyan-300 bg-clip-text text-transparent">convierten visitas en clientes</span>
+      </h1>
+      <p class="mt-6 text-lg text-slate-300 max-w-xl">
+        Diseñamos y desarrollamos sitios web, tiendas online y aplicaciones a medida: rápidos, seguros y optimizados para Google, para que tu negocio crezca en internet.
+      </p>
+      <div class="mt-8 flex flex-col sm:flex-row gap-3">
+        <a href="#contacto" class="inline-flex justify-center items-center rounded-xl bg-brand-500 hover:bg-brand-600 px-6 py-3.5 font-semibold shadow-lg shadow-brand-500/30">Solicita una cotización gratis →</a>
+        <a href="#proyectos" class="inline-flex justify-center items-center rounded-xl border border-white/20 hover:bg-white/10 px-6 py-3.5 font-semibold">Ver proyectos</a>
+      </div>
+      <dl class="mt-12 grid grid-cols-3 gap-6 max-w-md text-center sm:text-left">
+        <div><dt class="text-3xl font-bold">+50</dt><dd class="text-xs text-slate-400 mt-1">proyectos*</dd></div>
+        <div><dt class="text-3xl font-bold">95+</dt><dd class="text-xs text-slate-400 mt-1">PageSpeed</dd></div>
+        <div><dt class="text-3xl font-bold">24 h</dt><dd class="text-xs text-slate-400 mt-1">respuesta</dd></div>
+      </dl>
+      <p class="mt-2 text-[11px] text-slate-500">*Cifras de ejemplo.</p>
+    </div>
+    <!-- Mockup -->
+    <div class="relative">
+      <div class="rounded-2xl border border-white/10 bg-slate-900/80 shadow-2xl overflow-hidden">
+        <div class="flex items-center gap-2 px-4 py-3 border-b border-white/10">
+          <span class="w-3 h-3 rounded-full bg-red-400"></span><span class="w-3 h-3 rounded-full bg-amber-400"></span><span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+          <span class="ml-3 flex-1 rounded-md bg-white/5 text-xs text-slate-400 px-3 py-1">tuempresa.com</span>
+        </div>
+        <div class="p-6 space-y-4">
+          <div class="h-6 w-2/3 rounded bg-gradient-to-r from-brand-500/70 to-cyan-400/60"></div>
+          <div class="h-3 w-full rounded bg-white/10"></div>
+          <div class="h-3 w-5/6 rounded bg-white/10"></div>
+          <div class="grid grid-cols-3 gap-3 pt-2">
+            <div class="h-24 rounded-lg bg-white/5 border border-white/10"></div>
+            <div class="h-24 rounded-lg bg-white/5 border border-white/10"></div>
+            <div class="h-24 rounded-lg bg-white/5 border border-white/10"></div>
+          </div>
+          <div class="flex gap-3"><div class="h-9 w-32 rounded-lg bg-brand-500"></div><div class="h-9 w-24 rounded-lg border border-white/20"></div></div>
+        </div>
+      </div>
+      <div class="absolute -bottom-6 -left-4 sm:-left-8 rounded-xl bg-white text-ink shadow-xl px-4 py-3 flex items-center gap-3">
+        <span class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 grid place-items-center font-bold">↑</span>
+        <div><p class="text-xs text-slate-500">Conversiones (ejemplo)</p><p class="font-bold">+38% este mes</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Tecnologías -->
+<section class="border-b border-slate-100">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 py-8 flex flex-wrap justify-center gap-x-10 gap-y-3 text-slate-400 font-semibold text-sm">
+    <span>React</span><span>Next.js</span><span>WordPress</span><span>Shopify</span><span>WooCommerce</span><span>Node.js</span><span>Laravel</span><span>Tailwind CSS</span>
+  </div>
+</section>
+
+<!-- Servicios -->
+<section id="servicios" class="py-20 lg:py-28">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="max-w-2xl">
+      <p class="text-brand-600 font-semibold text-sm uppercase tracking-wider">Servicios</p>
+      <h2 class="mt-3 text-3xl sm:text-4xl font-bold text-ink">Todo lo que tu negocio necesita para vender en internet</h2>
+      <p class="mt-4 text-lg text-slate-500">Soluciones a medida, desde tu primera web hasta plataformas complejas.</p>
+    </div>
+    <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="group rounded-2xl border border-slate-200 p-7 hover:border-brand-400 hover:shadow-xl transition">
+        <div class="w-12 h-12 rounded-xl bg-brand-50 text-brand-600 grid place-items-center text-2xl">🏢</div>
+        <h3 class="mt-5 text-lg font-bold text-ink">Sitios web corporativos</h3>
+        <p class="mt-2 text-sm text-slate-500">Webs modernas que transmiten confianza, presentan tus servicios y generan contactos.</p>
+        <ul class="mt-4 space-y-1 text-sm text-slate-600"><li>✓ Diseño a medida</li><li>✓ 100% responsive</li><li>✓ Panel autoadministrable</li></ul>
+      </div>
+      <div class="group rounded-2xl border border-slate-200 p-7 hover:border-brand-400 hover:shadow-xl transition">
+        <div class="w-12 h-12 rounded-xl bg-brand-50 text-brand-600 grid place-items-center text-2xl">🛒</div>
+        <h3 class="mt-5 text-lg font-bold text-ink">E-commerce</h3>
+        <p class="mt-2 text-sm text-slate-500">Tiendas online listas para vender, con pasarelas de pago locales e internacionales.</p>
+        <ul class="mt-4 space-y-1 text-sm text-slate-600"><li>✓ Pagos con tarjeta, Yape/Plin*</li><li>✓ Gestión de inventario</li><li>✓ Integración con envíos</li></ul>
+      </div>
+      <div class="group rounded-2xl border border-slate-200 p-7 hover:border-brand-400 hover:shadow-xl transition">
+        <div class="w-12 h-12 rounded-xl bg-brand-50 text-brand-600 grid place-items-center text-2xl">⚙️</div>
+        <h3 class="mt-5 text-lg font-bold text-ink">Aplicaciones web</h3>
+        <p class="mt-2 text-sm text-slate-500">Sistemas a medida: portales de clientes, reservas, dashboards e integraciones vía API.</p>
+        <ul class="mt-4 space-y-1 text-sm text-slate-600"><li>✓ Arquitectura escalable</li><li>✓ Usuarios y roles</li><li>✓ Integraciones con tu ERP/CRM</li></ul>
+      </div>
+      <div class="group rounded-2xl border border-slate-200 p-7 hover:border-brand-400 hover:shadow-xl transition">
+        <div class="w-12 h-12 rounded-xl bg-brand-50 text-brand-600 grid place-items-center text-2xl">🚀</div>
+        <h3 class="mt-5 text-lg font-bold text-ink">Mantenimiento y SEO</h3>
+        <p class="mt-2 text-sm text-slate-500">Mantén tu web segura, rápida y bien posicionada en Google mes a mes.</p>
+        <ul class="mt-4 space-y-1 text-sm text-slate-600"><li>✓ Copias de seguridad</li><li>✓ Actualizaciones y soporte</li><li>✓ SEO técnico y reportes</li></ul>
+      </div>
+    </div>
+    <p class="mt-4 text-xs text-slate-400">*Métodos de pago sujetos a disponibilidad en tu país.</p>
+  </div>
+</section>
+
+<!-- Proceso -->
+<section id="proceso" class="py-20 lg:py-28 bg-slate-50">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto">
+      <p class="text-brand-600 font-semibold text-sm uppercase tracking-wider">Cómo trabajamos</p>
+      <h2 class="mt-3 text-3xl sm:text-4xl font-bold text-ink">Un proceso claro, de la idea al lanzamiento</h2>
+    </div>
+    <ol class="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <li class="relative rounded-2xl bg-white p-7 shadow-sm"><span class="text-5xl font-extrabold text-brand-100">01</span><h3 class="mt-2 text-lg font-bold text-ink">Descubrimiento</h3><p class="mt-2 text-sm text-slate-500">Conversamos sobre tus objetivos, público y competencia. Te enviamos una propuesta y cotización detallada.</p></li>
+      <li class="relative rounded-2xl bg-white p-7 shadow-sm"><span class="text-5xl font-extrabold text-brand-100">02</span><h3 class="mt-2 text-lg font-bold text-ink">Diseño</h3><p class="mt-2 text-sm text-slate-500">Creamos la estructura y el diseño visual. Lo revisas y ajustamos hasta que quede como lo imaginas.</p></li>
+      <li class="relative rounded-2xl bg-white p-7 shadow-sm"><span class="text-5xl font-extrabold text-brand-100">03</span><h3 class="mt-2 text-lg font-bold text-ink">Desarrollo</h3><p class="mt-2 text-sm text-slate-500">Programamos con buenas prácticas, pruebas en todos los dispositivos y avances semanales.</p></li>
+      <li class="relative rounded-2xl bg-white p-7 shadow-sm"><span class="text-5xl font-extrabold text-brand-100">04</span><h3 class="mt-2 text-lg font-bold text-ink">Lanzamiento y soporte</h3><p class="mt-2 text-sm text-slate-500">Publicamos tu proyecto, te capacitamos y te acompañamos con soporte post-lanzamiento.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- Proyectos -->
+<section id="proyectos" class="py-20 lg:py-28">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+      <div class="max-w-2xl">
+        <p class="text-brand-600 font-semibold text-sm uppercase tracking-wider">Proyectos</p>
+        <h2 class="mt-3 text-3xl sm:text-4xl font-bold text-ink">Trabajos recientes</h2>
+        <p class="mt-2 text-sm text-slate-400">Proyectos de ejemplo (marcadores de posición).</p>
+      </div>
+      <a href="#contacto" class="text-brand-600 font-semibold hover:underline">¿Tu proyecto es el próximo? →</a>
+    </div>
+    <div class="mt-12 grid md:grid-cols-3 gap-6">
+      <article class="rounded-2xl overflow-hidden border border-slate-200 hover:shadow-xl transition">
+        <div class="h-52 bg-gradient-to-br from-indigo-500 to-purple-600 grid place-items-center text-white/90 font-bold text-xl">Proyecto de ejemplo A</div>
+        <div class="p-6"><span class="text-xs font-semibold text-brand-600 bg-brand-50 rounded-full px-2.5 py-1">E-commerce</span><h3 class="mt-3 font-bold text-ink">Tienda de moda online</h3><p class="mt-1 text-sm text-slate-500">Catálogo, pagos y envíos integrados. Carga en menos de 2 s.</p></div>
+      </article>
+      <article class="rounded-2xl overflow-hidden border border-slate-200 hover:shadow-xl transition">
+        <div class="h-52 bg-gradient-to-br from-cyan-500 to-blue-600 grid place-items-center text-white/90 font-bold text-xl">Proyecto de ejemplo B</div>
+        <div class="p-6"><span class="text-xs font-semibold text-brand-600 bg-brand-50 rounded-full px-2.5 py-1">Sitio corporativo</span><h3 class="mt-3 font-bold text-ink">Estudio de arquitectura</h3><p class="mt-1 text-sm text-slate-500">Web institucional con portafolio y formulario de captación.</p></div>
+      </article>
+      <article class="rounded-2xl overflow-hidden border border-slate-200 hover:shadow-xl transition">
+        <div class="h-52 bg-gradient-to-br from-emerald-500 to-teal-600 grid place-items-center text-white/90 font-bold text-xl">Proyecto de ejemplo C</div>
+        <div class="p-6"><span class="text-xs font-semibold text-brand-600 bg-brand-50 rounded-full px-2.5 py-1">Aplicación web</span><h3 class="mt-3 font-bold text-ink">Sistema de reservas</h3><p class="mt-1 text-sm text-slate-500">Agenda online, recordatorios y panel de administración.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Por qué elegirnos -->
+<section class="py-20 lg:py-28 bg-ink text-white relative overflow-hidden">
+  <div class="absolute inset-0 grid-bg opacity-60"></div>
+  <div class="relative max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-2 gap-14 items-center">
+    <div>
+      <p class="text-brand-400 font-semibold text-sm uppercase tracking-wider">¿Por qué elegirnos?</p>
+      <h2 class="mt-3 text-3xl sm:text-4xl font-bold">Tecnología de primer nivel, trato cercano</h2>
+      <p class="mt-4 text-slate-300 text-lg">Somos tu equipo digital: hablamos tu idioma, entendemos tu mercado y cumplimos los plazos.</p>
+      <a href="#contacto" class="mt-8 inline-flex rounded-xl bg-brand-500 hover:bg-brand-600 px-6 py-3.5 font-semibold">Hablemos de tu proyecto</a>
+    </div>
+    <div class="grid sm:grid-cols-2 gap-5">
+      <div class="rounded-2xl bg-white/5 border border-white/10 p-6"><p class="text-2xl">⚡</p><h3 class="mt-3 font-bold">Velocidad y rendimiento</h3><p class="mt-1 text-sm text-slate-400">Sitios optimizados que cargan rápido y rankean mejor.</p></div>
+      <div class="rounded-2xl bg-white/5 border border-white/10 p-6"><p class="text-2xl">📱</p><h3 class="mt-3 font-bold">Pensado para móviles</h3><p class="mt-1 text-sm text-slate-400">Experiencia impecable en celular, tablet y escritorio.</p></div>
+      <div class="rounded-2xl bg-white/5 border border-white/10 p-6"><p class="text-2xl">🔒</p><h3 class="mt-3 font-bold">Seguridad incluida</h3><p class="mt-1 text-sm text-slate-400">SSL, copias de seguridad y buenas prácticas desde el día uno.</p></div>
+      <div class="rounded-2xl bg-white/5 border border-white/10 p-6"><p class="text-2xl">🤝</p><h3 class="mt-3 font-bold">Precio claro, sin sorpresas</h3><p class="mt-1 text-sm text-slate-400">Cotización detallada y comunicación directa por WhatsApp.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonios -->
+<section class="py-20 lg:py-28">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto">
+      <p class="text-brand-600 font-semibold text-sm uppercase tracking-wider">Testimonios</p>
+      <h2 class="mt-3 text-3xl sm:text-4xl font-bold text-ink">Lo que dicen nuestros clientes</h2>
+      <p class="mt-2 text-sm text-slate-400">Testimonios de ejemplo — reemplazar por reseñas reales.</p>
+    </div>
+    <div class="mt-12 grid md:grid-cols-3 gap-6">
+      <figure class="rounded-2xl border border-slate-200 p-7"><p class="text-amber-400">★★★★★</p><blockquote class="mt-3 text-slate-600">“Texto de ejemplo: el equipo entendió lo que necesitábamos y entregó una web rápida y fácil de administrar.”</blockquote><figcaption class="mt-5 flex items-center gap-3"><span class="w-10 h-10 rounded-full bg-brand-100 text-brand-700 grid place-items-center font-bold">C1</span><div><p class="font-semibold text-ink">Cliente de ejemplo 1</p><p class="text-xs text-slate-400">Empresa de servicios (ficticia)</p></div></figcaption></figure>
+      <figure class="rounded-2xl border border-slate-200 p-7"><p class="text-amber-400">★★★★★</p><blockquote class="mt-3 text-slate-600">“Texto de ejemplo: nuestra tienda online empezó a recibir pedidos desde la primera semana.”</blockquote><figcaption class="mt-5 flex items-center gap-3"><span class="w-10 h-10 rounded-full bg-cyan-100 text-cyan-700 grid place-items-center font-bold">C2</span><div><p class="font-semibold text-ink">Cliente de ejemplo 2</p><p class="text-xs text-slate-400">Tienda online (ficticia)</p></div></figcaption></figure>
+      <figure class="rounded-2xl border border-slate-200 p-7"><p class="text-amber-400">★★★★★</p><blockquote class="mt-3 text-slate-600">“Texto de ejemplo: el sistema a medida nos ahorró horas de trabajo manual cada semana.”</blockquote><figcaption class="mt-5 flex items-center gap-3"><span class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-700 grid place-items-center font-bold">C3</span><div><p class="font-semibold text-ink">Cliente de ejemplo 3</p><p class="text-xs text-slate-400">Clínica (ficticia)</p></div></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- Planes -->
+<section id="planes" class="py-20 lg:py-28 bg-slate-50">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto">
+      <p class="text-brand-600 font-semibold text-sm uppercase tracking-wider">Planes</p>
+      <h2 class="mt-3 text-3xl sm:text-4xl font-bold text-ink">Paquetes pensados para cada etapa</h2>
+      <p class="mt-2 text-sm text-slate-400">Precios referenciales de ejemplo. Cada proyecto se cotiza a medida.</p>
+    </div>
+    <div class="mt-12 grid md:grid-cols-3 gap-6 items-stretch">
+      <div class="rounded-2xl bg-white border border-slate-200 p-8 flex flex-col">
+        <h3 class="font-bold text-ink text-lg">Emprendedor</h3><p class="text-sm text-slate-500 mt-1">Ideal para empezar tu presencia online.</p>
+        <p class="mt-6"><span class="text-sm text-slate-500">desde</span> <span class="text-4xl font-extrabold text-ink">S/ 1,500</span></p>
+        <ul class="mt-6 space-y-2 text-sm text-slate-600 flex-1"><li>✓ Landing page o web de hasta 5 secciones</li><li>✓ Diseño responsive</li><li>✓ Formulario y WhatsApp</li><li>✓ SEO básico</li></ul>
+        <a href="#contacto" class="mt-8 text-center rounded-xl border border-slate-300 hover:border-brand-500 hover:text-brand-600 py-3 font-semibold">Cotizar</a>
+      </div>
+      <div class="rounded-2xl bg-ink text-white p-8 flex flex-col ring-2 ring-brand-500 relative md:-translate-y-3 shadow-2xl">
+        <span class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-brand-500 text-xs font-semibold px-3 py-1">Más elegido</span>
+        <h3 class="font-bold text-lg">Empresa</h3><p class="text-sm text-slate-400 mt-1">Web corporativa completa y autoadministrable.</p>
+        <p class="mt-6"><span class="text-sm text-slate-400">desde</span> <span class="text-4xl font-extrabold">S/ 3,900</span></p>
+        <ul class="mt-6 space-y-2 text-sm text-slate-300 flex-1"><li>✓ Hasta 10 páginas + blog</li><li>✓ Panel de administración</li><li>✓ SEO on-page y analítica</li><li>✓ 3 meses de soporte</li></ul>
+        <a href="#contacto" class="mt-8 text-center rounded-xl bg-brand-500 hover:bg-brand-600 py-3 font-semibold">Solicita una cotización</a>
+      </div>
+      <div class="rounded-2xl bg-white border border-slate-200 p-8 flex flex-col">
+        <h3 class="font-bold text-ink text-lg">E-commerce / A medida</h3><p class="text-sm text-slate-500 mt-1">Tiendas online y aplicaciones web.</p>
+        <p class="mt-6"><span class="text-4xl font-extrabold text-ink">A cotizar</span></p>
+        <ul class="mt-6 space-y-2 text-sm text-slate-600 flex-1"><li>✓ Tienda o sistema a medida</li><li>✓ Pasarelas de pago</li><li>✓ Integraciones y API</li><li>✓ Soporte prioritario</li></ul>
+        <a href="#contacto" class="mt-8 text-center rounded-xl border border-slate-300 hover:border-brand-500 hover:text-brand-600 py-3 font-semibold">Conversemos</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="py-20 lg:py-28">
+  <div class="max-w-3xl mx-auto px-5 lg:px-8">
+    <div class="text-center">
+      <p class="text-brand-600 font-semibold text-sm uppercase tracking-wider">Preguntas frecuentes</p>
+      <h2 class="mt-3 text-3xl sm:text-4xl font-bold text-ink">¿Tienes dudas? Te respondemos</h2>
+    </div>
+    <div class="mt-12 divide-y divide-slate-200 border-y border-slate-200">
+      <details class="group py-5"><summary class="flex justify-between items-center cursor-pointer font-semibold text-ink">¿Cuánto tiempo toma desarrollar mi web?<span class="chev text-2xl text-brand-500 transition">+</span></summary><p class="mt-3 text-slate-500">Una web corporativa suele tomar entre 2 y 4 semanas; una tienda online o aplicación, entre 4 y 10 semanas, según el alcance.</p></details>
+      <details class="group py-5"><summary class="flex justify-between items-center cursor-pointer font-semibold text-ink">¿Podré editar el contenido yo mismo?<span class="chev text-2xl text-brand-500 transition">+</span></summary><p class="mt-3 text-slate-500">Sí. Entregamos un panel autoadministrable y una capacitación para que actualices textos, imágenes y productos.</p></details>
+      <details class="group py-5"><summary class="flex justify-between items-center cursor-pointer font-semibold text-ink">¿Incluye dominio y hosting?<span class="chev text-2xl text-brand-500 transition">+</span></summary><p class="mt-3 text-slate-500">Te asesoramos para elegirlos y podemos gestionarlos por ti. El primer año puede incluirse según el plan.</p></details>
+      <details class="group py-5"><summary class="flex justify-between items-center cursor-pointer font-semibold text-ink">¿Cómo son las formas de pago?<span class="chev text-2xl text-brand-500 transition">+</span></summary><p class="mt-3 text-slate-500">Normalmente 50% al iniciar y 50% al entregar. Para proyectos grandes, pagos por hitos.</p></details>
+      <details class="group py-5"><summary class="flex justify-between items-center cursor-pointer font-semibold text-ink">¿Qué pasa después del lanzamiento?<span class="chev text-2xl text-brand-500 transition">+</span></summary><p class="mt-3 text-slate-500">Incluimos un periodo de soporte y ofrecemos planes de mantenimiento y SEO mensuales para mantener tu web al día.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- Contacto -->
+<section id="contacto" class="py-20 lg:py-28 bg-gradient-to-br from-brand-600 to-indigo-900 text-white">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-2 gap-14">
+    <div>
+      <h2 class="text-3xl sm:text-4xl font-bold">¿Listo para llevar tu negocio al siguiente nivel?</h2>
+      <p class="mt-4 text-lg text-brand-100">Cuéntanos tu idea y recibe una cotización sin compromiso en menos de 24 horas.</p>
+      <ul class="mt-8 space-y-4 text-brand-100">
+        <li class="flex gap-3"><span>📧</span> hola@ejemplo.com <span class="text-xs opacity-70">(marcador)</span></li>
+        <li class="flex gap-3"><span>💬</span> WhatsApp: +51 900 000 000 <span class="text-xs opacity-70">(marcador)</span></li>
+        <li class="flex gap-3"><span>📍</span> Lima, Perú · Atendemos en toda Latinoamérica</li>
+      </ul>
+    </div>
+    <form class="rounded-2xl bg-white text-ink p-7 sm:p-8 shadow-2xl space-y-4" onsubmit="event.preventDefault();this.querySelector('[data-ok]').classList.remove('hidden')">
+      <div class="grid sm:grid-cols-2 gap-4">
+        <label class="block"><span class="text-sm font-medium">Nombre</span><input required class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="Tu nombre" /></label>
+        <label class="block"><span class="text-sm font-medium">Correo</span><input required type="email" class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="tu@correo.com" /></label>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <label class="block"><span class="text-sm font-medium">Teléfono / WhatsApp</span><input class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="+51 ..." /></label>
+        <label class="block"><span class="text-sm font-medium">Servicio</span><select class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500"><option>Sitio web corporativo</option><option>E-commerce</option><option>Aplicación web</option><option>Mantenimiento / SEO</option><option>Otro</option></select></label>
+      </div>
+      <label class="block"><span class="text-sm font-medium">Cuéntanos sobre tu proyecto</span><textarea rows="4" class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="Objetivos, plazos, presupuesto aproximado..."></textarea></label>
+      <button class="w-full rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3.5">Solicita una cotización</button>
+      <p data-ok class="hidden text-sm text-emerald-600 text-center">¡Gracias! (Demo: el formulario aún no envía datos.)</p>
+      <p class="text-xs text-slate-400 text-center">Respondemos en menos de 24 horas hábiles.</p>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-ink text-slate-400">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 py-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-10 text-sm">
+    <div>
+      <a href="#" class="flex items-center gap-2 text-white font-bold text-lg"><span class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-500 to-cyan-400 grid place-items-center text-sm">&lt;/&gt;</span>NovaCode<span class="text-brand-400">Studio</span></a>
+      <p class="mt-4">Desarrollo web profesional para empresas y emprendedores.</p>
+    </div>
+    <div><h4 class="text-white font-semibold">Servicios</h4><ul class="mt-4 space-y-2"><li>Sitios corporativos</li><li>E-commerce</li><li>Aplicaciones web</li><li>Mantenimiento y SEO</li></ul></div>
+    <div><h4 class="text-white font-semibold">Empresa</h4><ul class="mt-4 space-y-2"><li><a href="#proceso" class="hover:text-white">Proceso</a></li><li><a href="#proyectos" class="hover:text-white">Proyectos</a></li><li><a href="#planes" class="hover:text-white">Planes</a></li><li><a href="#faq" class="hover:text-white">Preguntas frecuentes</a></li></ul></div>
+    <div><h4 class="text-white font-semibold">Contacto</h4><ul class="mt-4 space-y-2"><li>hola@ejemplo.com</li><li>+51 900 000 000</li><li>Lima, Perú</li></ul></div>
+  </div>
+  <div class="border-t border-white/10"><div class="max-w-7xl mx-auto px-5 lg:px-8 py-6 flex flex-col sm:flex-row justify-between gap-2 text-xs"><p>© 2026 NovaCode Studio (nombre de marcador). Todos los derechos reservados.</p><p>Política de privacidad · Términos</p></div></div>
+</footer>
+
+<script>
+document.getElementById('menuBtn').addEventListener('click',()=>document.getElementById('mobileNav').classList.toggle('hidden'));
+</script>
+</body>
+</html>
