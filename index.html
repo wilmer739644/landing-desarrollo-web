@@ -1,330 +1,562 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-PE">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>NovaCode Studio · Desarrollo web profesional</title>
-<meta name="description" content="Diseñamos y desarrollamos sitios web, tiendas online y aplicaciones web a medida para empresas en Latinoamérica." />
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-<script>
-tailwind.config = { theme: { extend: {
-  fontFamily: { sans: ['Inter','system-ui','sans-serif'] },
-  colors: { brand: { 50:'#eef2ff',100:'#e0e7ff',400:'#818cf8',500:'#6366f1',600:'#4f46e5',700:'#4338ca' }, ink: '#0b1020' }
-}}}
-</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NovaCode Studio — Páginas web y tiendas online en Lima</title>
+<meta name="description" content="Estudio pequeño de desarrollo web en Lima. Webs corporativas, tiendas online, aplicaciones web y mantenimiento para negocios peruanos. Plazos claros y precios de referencia en soles.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  html{scroll-behavior:smooth}
-  .grid-bg{background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:44px 44px}
-  details summary::-webkit-details-marker{display:none}
-  details[open] .chev{transform:rotate(45deg)}
+:root{
+  --paper:#F3EFE6; --paper-2:#EAE4D8; --ink:#1B1A17; --ink-2:#4A4740; --muted:#7A756A;
+  --rule:#CFC7B7; --accent:#C8432B; --accent-ink:#9E3120;
+  --serif:'Fraunces',Georgia,serif; --sans:'Hanken Grotesk',system-ui,sans-serif; --mono:'JetBrains Mono',ui-monospace,monospace;
+  --pad:clamp(20px,5vw,72px); --max:1280px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;overflow-x:hidden}
+a{color:inherit}
+img,svg{display:block;max-width:100%}
+::selection{background:var(--accent);color:var(--paper)}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+.muted{color:var(--muted)}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px solid var(--rule);padding:2px 6px;border-radius:2px;white-space:nowrap;display:inline-block}
+h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.02em;line-height:1.05;font-variation-settings:"opsz" 144}
+h2{font-size:clamp(34px,4.6vw,60px)}
+h3{font-size:clamp(22px,2vw,27px);line-height:1.2;font-variation-settings:"opsz" 48}
+em.it{font-style:italic;font-weight:300}
+.link{text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:1px;transition:color .2s,border-color .2s}
+.link:hover{color:var(--accent)}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:500;font-size:16px;padding:15px 22px;border:1px solid var(--ink);border-radius:2px;transition:background .2s,border-color .2s;cursor:pointer;font-family:var(--sans)}
+.btn:hover{background:var(--accent);border-color:var(--accent)}
+.btn .arr{transition:transform .2s}
+.btn:hover .arr{transform:translateX(3px)}
+.btn-ghost{background:transparent;color:var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(243,239,230,.96);border-bottom:1px solid var(--rule)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font-family:var(--serif);font-size:22px;text-decoration:none;letter-spacing:-.01em;display:flex;align-items:baseline;gap:8px}
+.logo b{font-weight:500}
+.logo .dot{width:8px;height:8px;background:var(--accent);border-radius:50%;display:inline-block;transform:translateY(-2px)}
+.nav ul{display:flex;list-style:none;gap:30px;font-size:15px}
+.nav ul a{text-decoration:none;color:var(--ink-2);transition:color .2s}
+.nav ul a:hover{color:var(--accent)}
+.nav .btn{padding:10px 16px;font-size:14.5px}
+.menu-btn{display:none;background:none;border:1px solid var(--ink);border-radius:2px;padding:8px 12px;font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;color:var(--ink)}
+.mobile{display:none;border-top:1px solid var(--rule);background:var(--paper)}
+.mobile.open{display:block}
+.mobile a{display:flex;justify-content:space-between;padding:16px var(--pad);border-bottom:1px solid var(--rule);text-decoration:none;font-family:var(--serif);font-size:22px}
+.mobile a span{font-family:var(--mono);font-size:12px;color:var(--muted);align-self:center}
+
+/* hero */
+.hero{padding:clamp(56px,9vw,120px) 0 0}
+.hero-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:end}
+.hero-meta{grid-column:1/-1;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:40px;color:var(--muted)}
+.hero h1{grid-column:1/11;font-size:clamp(46px,8.2vw,124px);line-height:.96;font-weight:300}
+.hero h1 .acc{color:var(--accent);font-style:italic}
+.hero-side{grid-column:1/6;margin-top:48px}
+.hero-side p{font-size:19px;color:var(--ink-2);max-width:480px}
+.hero-cta{grid-column:7/13;margin-top:48px;display:flex;flex-direction:column;gap:18px;align-items:flex-start}
+.hero-cta small{color:var(--muted);font-size:14px}
+.hero-strip{margin-top:clamp(64px,8vw,110px);border-top:1px solid var(--ink);display:grid;grid-template-columns:repeat(4,1fr)}
+.hero-strip div{padding:18px 20px 22px 0;border-right:1px solid var(--rule);font-size:15px;color:var(--ink-2)}
+.hero-strip div+div{padding-left:20px}
+.hero-strip div:last-child{border-right:0}
+.hero-strip b{display:block;font-family:var(--mono);font-weight:400;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink);margin-bottom:6px}
+
+/* sections */
+section{padding:clamp(80px,10vw,140px) 0}
+.sec-head{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;margin-bottom:clamp(40px,5vw,72px)}
+.sec-num{grid-column:1/3;font-family:var(--mono);font-size:12px;color:var(--accent);padding-top:14px;letter-spacing:.05em}
+.sec-head h2{grid-column:3/10}
+.sec-head p{grid-column:3/9;color:var(--ink-2);margin-top:18px;font-size:18px}
+.rule-top{border-top:1px solid var(--ink)}
+
+/* services */
+.svc{border-top:1px solid var(--ink)}
+.svc-row{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;padding:36px 0;border-bottom:1px solid var(--rule);transition:background .25s}
+.svc-row:hover{background:var(--paper-2)}
+.svc-row .n{grid-column:1/3;font-family:var(--mono);font-size:12px;color:var(--muted);padding-top:8px}
+.svc-row h3{grid-column:3/6}
+.svc-row .desc{grid-column:6/10;color:var(--ink-2)}
+.svc-row .desc ul{list-style:none;margin-top:14px;font-size:15px}
+.svc-row .desc li{padding:5px 0;border-top:1px dashed var(--rule)}
+.svc-row .desc li::before{content:"— ";color:var(--muted)}
+.svc-row .price{grid-column:10/13;text-align:right}
+.svc-row .price strong{display:block;font-family:var(--serif);font-weight:400;font-size:26px;letter-spacing:-.01em}
+.svc-row .price span{font-size:14px;color:var(--muted)}
+
+/* process */
+.process{background:var(--ink);color:var(--paper)}
+.process .sec-head p{color:#BDB6A8}
+.process .sec-num{color:#E8795F}
+.steps{border-top:1px solid #4A4740}
+.step{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;padding:28px 0;border-bottom:1px solid #3A3833;align-items:baseline}
+.step .n{grid-column:1/3;font-family:var(--serif);font-size:44px;font-weight:300;color:#E8795F;line-height:1}
+.step h3{grid-column:3/6}
+.step p{grid-column:6/10;color:#C9C2B4;font-size:16px}
+.step .t{grid-column:10/13;text-align:right;font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:#BDB6A8}
+
+/* portfolio */
+.work{display:grid;grid-template-columns:repeat(12,1fr);gap:48px 24px}
+.work article{text-decoration:none}
+.work .w1{grid-column:1/8}
+.work .w2{grid-column:9/13;margin-top:120px}
+.work .w3{grid-column:2/6}
+.work .w4{grid-column:7/13;margin-top:-60px}
+.thumb{border:1px solid var(--ink);background:var(--paper-2);aspect-ratio:4/3;position:relative;overflow:hidden}
+.w1 .thumb,.w4 .thumb{aspect-ratio:16/10}
+.thumb svg{width:100%;height:100%;transition:transform .5s ease}
+.work article:hover .thumb svg{transform:scale(1.02)}
+.work .cap{display:flex;justify-content:space-between;gap:16px;align-items:baseline;padding-top:14px;border-bottom:1px solid var(--rule);padding-bottom:14px}
+.work .cap h3{font-size:22px}
+.work .cap p{font-size:14.5px;color:var(--ink-2);margin-top:4px}
+.work .cap .tag{flex-shrink:0}
+
+/* why */
+.why-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.why-intro{grid-column:1/5}
+.why-intro h2{margin:14px 0 20px}
+.why-intro p{color:var(--ink-2)}
+.why-list{grid-column:6/13;list-style:none;counter-reset:w;border-top:1px solid var(--ink)}
+.why-list li{counter-increment:w;display:grid;grid-template-columns:56px 1fr;gap:12px;padding:24px 0;border-bottom:1px solid var(--rule)}
+.why-list li::before{content:counter(w,decimal-leading-zero);font-family:var(--mono);font-size:12px;color:var(--accent);padding-top:6px}
+.why-list h3{font-size:22px;margin-bottom:6px}
+.why-list p{color:var(--ink-2);font-size:16px}
+
+/* quote */
+.quote{background:var(--paper-2);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.q-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.q-main{grid-column:2/12}
+.q-main blockquote{font-family:var(--serif);font-weight:300;font-size:clamp(28px,3.9vw,52px);line-height:1.15;letter-spacing:-.015em}
+.q-main blockquote .acc{color:var(--accent);font-style:italic}
+.q-main .who{margin-top:32px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;color:var(--ink-2);font-size:15px}
+.q-small{grid-column:2/12;display:grid;grid-template-columns:1fr 1fr;gap:24px 48px;margin-top:72px;border-top:1px solid var(--ink)}
+.q-small figure{padding-top:24px}
+.q-small blockquote{font-size:17px;color:var(--ink-2)}
+.q-small figcaption{margin-top:14px;font-size:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+
+/* packages table */
+.pk{width:100%;border-collapse:collapse;border-top:1px solid var(--ink)}
+.pk th,.pk td{text-align:left;vertical-align:top;padding:18px 20px 18px 0;border-bottom:1px solid var(--rule);font-weight:400}
+.pk thead th{padding-top:26px;padding-bottom:26px}
+.pk thead th .name{font-family:var(--serif);font-size:30px;letter-spacing:-.01em;display:block;line-height:1.1}
+.pk thead th .p{display:block;margin-top:10px;font-size:15px;color:var(--ink-2)}
+.pk thead th .p b{font-family:var(--serif);font-weight:500;font-size:22px;color:var(--ink)}
+.pk tbody th{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);width:22%;padding-top:21px}
+.pk td{font-size:16px;color:var(--ink-2)}
+.pk .hl{background:var(--paper-2);padding-left:20px}
+.pk .rec{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);display:block;margin-bottom:8px}
+.pk tfoot td,.pk tfoot th{border-bottom:0;padding-top:26px}
+.pk-m{display:none}
+.pk-note{margin-top:22px;font-size:14.5px;color:var(--muted);max-width:760px}
+
+/* faq */
+.faq-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.faq-grid .sec-num{grid-column:1/3}
+.faq-side{grid-column:3/6}
+.faq-side p{color:var(--ink-2);margin-top:18px}
+.faq-list{grid-column:7/13;border-top:1px solid var(--ink)}
+details{border-bottom:1px solid var(--rule)}
+summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;padding:22px 0;font-family:var(--serif);font-size:21px;line-height:1.3;transition:color .2s}
+summary::-webkit-details-marker{display:none}
+summary:hover{color:var(--accent)}
+summary .pm{font-family:var(--mono);font-size:18px;color:var(--muted);flex-shrink:0;transition:transform .2s}
+details[open] summary .pm{transform:rotate(45deg);color:var(--accent)}
+details p{padding:0 40px 24px 0;color:var(--ink-2);font-size:16px}
+
+/* contact */
+.contact{border-top:1px solid var(--ink)}
+.c-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.c-info{grid-column:1/6}
+.c-info h2{font-size:clamp(40px,5.6vw,76px);margin:14px 0 24px}
+.c-info p{color:var(--ink-2);max-width:420px}
+.c-direct{margin-top:40px;border-top:1px solid var(--rule)}
+.c-direct div{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--rule);font-size:16px;flex-wrap:wrap}
+.c-direct span:first-child{font-family:var(--mono);font-size:12px;text-transform:uppercase;color:var(--muted);letter-spacing:.04em;padding-top:3px}
+form{grid-column:7/13;display:grid;grid-template-columns:1fr 1fr;gap:28px 24px;align-content:start}
+.f{display:flex;flex-direction:column;gap:6px}
+.f.full{grid-column:1/-1}
+label{font-family:var(--mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-2)}
+input,select,textarea{font:inherit;font-size:17px;color:var(--ink);background:transparent;border:0;border-bottom:1px solid var(--ink);padding:10px 0;border-radius:0;outline:none;width:100%;transition:border-color .2s}
+select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%231B1A17' stroke-width='1.3'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 2px center;padding-right:24px}
+textarea{resize:vertical;min-height:110px}
+input:focus,select:focus,textarea:focus{border-bottom-color:var(--accent);border-bottom-width:2px;padding-bottom:9px}
+.f-foot{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.f-foot small{color:var(--muted);font-size:13.5px;max-width:320px}
+.ok{grid-column:1/-1;display:none;border-left:2px solid var(--accent);padding:12px 16px;background:var(--paper-2);font-size:15px}
+.ok.show{display:block}
+
+/* footer */
+footer{background:var(--ink);color:#C9C2B4;padding:72px 0 32px;font-size:15px}
+.ft{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.ft-brand{grid-column:1/6}
+.ft-brand .logo{color:var(--paper);font-size:30px}
+.ft-brand p{margin-top:14px;max-width:340px}
+.ft-col{grid-column:span 2}
+.ft-col:first-of-type{grid-column:7/9}
+.ft-col h4{font-family:var(--mono);font-weight:400;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:#8E887C;margin-bottom:14px}
+.ft-col a{display:block;text-decoration:none;padding:3px 0;transition:color .2s}
+.ft-col a:hover{color:#E8795F}
+.ft-bottom{margin-top:64px;padding-top:22px;border-top:1px solid #3A3833;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:13px;color:#8E887C}
+.ft-bottom .note{max-width:640px}
+
+/* responsive */
+@media (max-width:1024px){
+  .nav ul,.nav .btn{display:none}
+  .menu-btn{display:block}
+  .svc-row h3{grid-column:3/7}.svc-row .desc{grid-column:7/13}.svc-row .price{grid-column:7/13;text-align:left}
+  .step p{grid-column:6/13}.step .t{grid-column:6/13;text-align:left}
+}
+@media (max-width:760px){
+  body{font-size:16px}
+  .hero-grid,.sec-head,.svc-row,.step,.work,.why-grid,.q-grid,.faq-grid,.c-grid,.ft{grid-template-columns:1fr;gap:16px}
+  .hero-grid>*,.sec-head>*,.svc-row>*,.step>*,.work>*,.why-grid>*,.q-grid>*,.faq-grid>*,.c-grid>*,.ft>*,form{grid-column:1/-1!important}
+  .hero h1{font-size:clamp(44px,13vw,64px)}
+  .hero-side,.hero-cta{margin-top:24px}
+  .hero-strip{grid-template-columns:1fr 1fr}
+  .hero-strip div{padding:16px 12px 16px 0!important;border-right:0;border-bottom:1px solid var(--rule)}
+  .hero-strip div:nth-child(even){padding-left:12px!important;border-left:1px solid var(--rule)}
+  .sec-num{padding-top:0}
+  .sec-head p{margin-top:4px}
+  .svc-row{padding:28px 0;gap:10px}
+  .svc-row .price{text-align:left}
+  .step{gap:6px}.step .n{font-size:34px}.step .t{text-align:left}
+  .work{gap:40px}.work .w2,.work .w4{margin-top:0}
+  .why-intro{margin-bottom:24px}
+  .q-small{grid-template-columns:1fr;margin-top:48px}
+  .pk thead{display:none}
+  .pk-m{display:block;border-top:1px solid var(--ink);margin-bottom:28px}
+  .pk-m div{display:flex;justify-content:space-between;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--rule)}
+  .pk-m dt{font-family:var(--serif);font-size:24px}
+  .pk-m dt .rec{display:block;margin:4px 0 0;font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--accent)}
+  .pk-m dd{font-family:var(--serif);font-size:22px;font-weight:500}
+  .pk tfoot .hl{padding-left:0}
+  .pk,.pk tbody,.pk tr,.pk td,.pk th,.pk tfoot{display:block;width:100%!important}
+  .pk{border-top:0}
+  .pk tbody tr{border-top:1px solid var(--ink);padding:14px 0 6px}
+  .pk tbody th{border:0;padding:0 0 8px}
+  .pk td{border:0;padding:6px 0 6px 96px;position:relative}
+  .pk td::before{content:attr(data-p);position:absolute;left:0;top:8px;font-family:var(--serif);font-size:15px;color:var(--ink)}
+  .pk .hl{background:transparent;padding-left:96px}
+  .pk tfoot tr{display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--ink);padding-top:18px}
+  .pk tfoot td{padding:0}.pk tfoot td::before,.pk tfoot th{display:none}
+  .pk tfoot .btn{width:100%;justify-content:space-between}
+  .faq-side{margin-bottom:24px}
+  form{grid-template-columns:1fr;margin-top:32px}
+  .ft{gap:32px}.ft-col{grid-column:auto!important}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
-<body class="font-sans text-slate-700 bg-white antialiased">
+<body>
 
-<!-- Aviso de marcador -->
-<div class="bg-amber-100 text-amber-900 text-xs text-center py-2 px-4">
-  Maqueta de ejemplo · “NovaCode Studio”, proyectos, testimonios, precios y datos de contacto son <strong>marcadores de posición</strong>.
-</div>
-
-<!-- Header -->
-<header class="sticky top-0 z-40 bg-ink/90 backdrop-blur border-b border-white/10">
-  <div class="max-w-7xl mx-auto px-5 lg:px-8 h-16 flex items-center justify-between">
-    <a href="#" class="flex items-center gap-2 text-white font-bold text-lg">
-      <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-500 to-cyan-400 grid place-items-center text-sm">&lt;/&gt;</span>
-      NovaCode<span class="text-brand-400">Studio</span>
-    </a>
-    <nav class="hidden md:flex items-center gap-8 text-sm text-slate-300">
-      <a href="#servicios" class="hover:text-white">Servicios</a>
-      <a href="#proceso" class="hover:text-white">Proceso</a>
-      <a href="#proyectos" class="hover:text-white">Proyectos</a>
-      <a href="#planes" class="hover:text-white">Planes</a>
-      <a href="#faq" class="hover:text-white">Preguntas</a>
-    </nav>
-    <a href="#contacto" class="hidden sm:inline-flex items-center rounded-lg bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold px-4 py-2">Solicita una cotización</a>
-    <button id="menuBtn" class="md:hidden text-white p-2" aria-label="Abrir menú">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-    </button>
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="logo"><span class="dot"></span><b>NovaCode</b> Studio</a>
+    <ul>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#proceso">Cómo trabajamos</a></li>
+      <li><a href="#trabajos">Trabajos</a></li>
+      <li><a href="#paquetes">Precios</a></li>
+      <li><a href="#faq">Preguntas</a></li>
+    </ul>
+    <a href="#contacto" class="btn">Solicita una cotización</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileNav">Menú</button>
   </div>
-  <div id="mobileNav" class="hidden md:hidden border-t border-white/10 px-5 py-4 space-y-3 text-slate-300">
-    <a href="#servicios" class="block">Servicios</a><a href="#proceso" class="block">Proceso</a><a href="#proyectos" class="block">Proyectos</a><a href="#planes" class="block">Planes</a><a href="#faq" class="block">Preguntas</a>
-    <a href="#contacto" class="block text-center rounded-lg bg-brand-500 text-white font-semibold py-2">Solicita una cotización</a>
-  </div>
+  <nav class="mobile" id="mobileNav" aria-label="Menú móvil">
+    <a href="#servicios">Servicios <span>01</span></a>
+    <a href="#proceso">Cómo trabajamos <span>02</span></a>
+    <a href="#trabajos">Trabajos <span>03</span></a>
+    <a href="#paquetes">Precios <span>06</span></a>
+    <a href="#faq">Preguntas <span>07</span></a>
+    <a href="#contacto">Solicita una cotización <span>→</span></a>
+  </nav>
 </header>
 
-<!-- Hero -->
-<section class="relative overflow-hidden bg-ink text-white">
-  <div class="absolute inset-0 grid-bg"></div>
-  <div class="absolute -top-40 -right-40 w-[36rem] h-[36rem] rounded-full bg-brand-600/30 blur-3xl"></div>
-  <div class="absolute -bottom-40 -left-40 w-[30rem] h-[30rem] rounded-full bg-cyan-500/20 blur-3xl"></div>
-  <div class="relative max-w-7xl mx-auto px-5 lg:px-8 py-20 lg:py-28 grid lg:grid-cols-2 gap-14 items-center">
-    <div>
-      <span class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-slate-300">
-        <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Agenda abierta para nuevos proyectos
-      </span>
-      <h1 class="mt-6 text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight">
-        Sitios web que <span class="bg-gradient-to-r from-brand-400 to-cyan-300 bg-clip-text text-transparent">convierten visitas en clientes</span>
-      </h1>
-      <p class="mt-6 text-lg text-slate-300 max-w-xl">
-        Diseñamos y desarrollamos sitios web, tiendas online y aplicaciones a medida: rápidos, seguros y optimizados para Google, para que tu negocio crezca en internet.
-      </p>
-      <div class="mt-8 flex flex-col sm:flex-row gap-3">
-        <a href="#contacto" class="inline-flex justify-center items-center rounded-xl bg-brand-500 hover:bg-brand-600 px-6 py-3.5 font-semibold shadow-lg shadow-brand-500/30">Solicita una cotización gratis →</a>
-        <a href="#proyectos" class="inline-flex justify-center items-center rounded-xl border border-white/20 hover:bg-white/10 px-6 py-3.5 font-semibold">Ver proyectos</a>
-      </div>
-      <dl class="mt-12 grid grid-cols-3 gap-6 max-w-md text-center sm:text-left">
-        <div><dt class="text-3xl font-bold">+50</dt><dd class="text-xs text-slate-400 mt-1">proyectos*</dd></div>
-        <div><dt class="text-3xl font-bold">95+</dt><dd class="text-xs text-slate-400 mt-1">PageSpeed</dd></div>
-        <div><dt class="text-3xl font-bold">24 h</dt><dd class="text-xs text-slate-400 mt-1">respuesta</dd></div>
-      </dl>
-      <p class="mt-2 text-[11px] text-slate-500">*Cifras de ejemplo.</p>
+<main id="top">
+<!-- HERO -->
+<div class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-meta mono"><span>Estudio de desarrollo web · Lima, Perú</span><span>Agenda abierta · octubre–noviembre</span></div>
+    <h1>Hacemos páginas web que tu cliente <span class="acc">entiende</span> y tú puedes actualizar.</h1>
+    <div class="hero-side">
+      <p>Somos un equipo chico: dos desarrolladores y una diseñadora. Trabajamos con negocios peruanos que necesitan una web clara, rápida en el celular y con un precio que se conoce desde el primer día.</p>
     </div>
-    <!-- Mockup -->
-    <div class="relative">
-      <div class="rounded-2xl border border-white/10 bg-slate-900/80 shadow-2xl overflow-hidden">
-        <div class="flex items-center gap-2 px-4 py-3 border-b border-white/10">
-          <span class="w-3 h-3 rounded-full bg-red-400"></span><span class="w-3 h-3 rounded-full bg-amber-400"></span><span class="w-3 h-3 rounded-full bg-emerald-400"></span>
-          <span class="ml-3 flex-1 rounded-md bg-white/5 text-xs text-slate-400 px-3 py-1">tuempresa.com</span>
+    <div class="hero-cta">
+      <a href="#contacto" class="btn">Solicita una cotización <span class="arr">→</span></a>
+      <small>Te respondemos en menos de 24 horas hábiles, con un presupuesto por escrito.</small>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="hero-strip">
+      <div><b>Plazo típico</b>2 a 4 semanas para una web corporativa</div>
+      <div><b>Desde</b>S/ 1,800 · precio de referencia</div>
+      <div><b>Pagos</b>50% al inicio, 50% al publicar</div>
+      <div><b>Después</b>30 días de ajustes sin costo</div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">01 — Servicios</div>
+      <h2>Cuatro cosas que hacemos, <em class="it">y las hacemos bien.</em></h2>
+      <p>No vendemos todo. Si lo que necesitas no está aquí, te lo decimos y, si podemos, te recomendamos a alguien.</p>
+    </div>
+    <div class="svc">
+      <div class="svc-row">
+        <div class="n">A.</div>
+        <h3>Webs corporativas</h3>
+        <div class="desc">Para que te encuentren en Google y te escriban por WhatsApp. Ideal para estudios, clínicas, constructoras y negocios de servicios.
+          <ul><li>Hasta 6 secciones</li><li>Formulario y botón de WhatsApp</li><li>Panel para editar textos y fotos</li></ul>
         </div>
-        <div class="p-6 space-y-4">
-          <div class="h-6 w-2/3 rounded bg-gradient-to-r from-brand-500/70 to-cyan-400/60"></div>
-          <div class="h-3 w-full rounded bg-white/10"></div>
-          <div class="h-3 w-5/6 rounded bg-white/10"></div>
-          <div class="grid grid-cols-3 gap-3 pt-2">
-            <div class="h-24 rounded-lg bg-white/5 border border-white/10"></div>
-            <div class="h-24 rounded-lg bg-white/5 border border-white/10"></div>
-            <div class="h-24 rounded-lg bg-white/5 border border-white/10"></div>
-          </div>
-          <div class="flex gap-3"><div class="h-9 w-32 rounded-lg bg-brand-500"></div><div class="h-9 w-24 rounded-lg border border-white/20"></div></div>
+        <div class="price"><strong>desde S/ 1,800</strong><span>2 a 4 semanas</span></div>
+      </div>
+      <div class="svc-row">
+        <div class="n">B.</div>
+        <h3>Tiendas online</h3>
+        <div class="desc">Catálogo, carrito y cobro con tarjeta, Yape o transferencia. Te dejamos todo listo para cargar productos tú mismo.
+          <ul><li>Pasarela de pago peruana (Culqi, Izipay o Mercado Pago)</li><li>Costos de envío por distrito</li><li>Capacitación de 2 horas</li></ul>
         </div>
+        <div class="price"><strong>desde S/ 4,500</strong><span>4 a 7 semanas</span></div>
       </div>
-      <div class="absolute -bottom-6 -left-4 sm:-left-8 rounded-xl bg-white text-ink shadow-xl px-4 py-3 flex items-center gap-3">
-        <span class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 grid place-items-center font-bold">↑</span>
-        <div><p class="text-xs text-slate-500">Conversiones (ejemplo)</p><p class="font-bold">+38% este mes</p></div>
+      <div class="svc-row">
+        <div class="n">C.</div>
+        <h3>Aplicaciones web</h3>
+        <div class="desc">Sistemas a medida: reservas, cotizadores, intranets, paneles para tu equipo. Primero entendemos el proceso; después escribimos código.
+          <ul><li>Levantamiento de requerimientos por escrito</li><li>Entregas cada dos semanas</li><li>Código y accesos a tu nombre</li></ul>
+        </div>
+        <div class="price"><strong>desde S/ 9,000</strong><span>según alcance</span></div>
+      </div>
+      <div class="svc-row">
+        <div class="n">D.</div>
+        <h3>Mantenimiento y SEO</h3>
+        <div class="desc">Actualizaciones, copias de seguridad, cambios pequeños y revisión mensual de cómo te encuentran en Google.
+          <ul><li>Hasta 3 horas de cambios al mes</li><li>Reporte mensual en lenguaje simple</li><li>Sin contrato de permanencia</li></ul>
+        </div>
+        <div class="price"><strong>S/ 250 al mes</strong><span>cancelas cuando quieras</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Tecnologías -->
-<section class="border-b border-slate-100">
-  <div class="max-w-7xl mx-auto px-5 lg:px-8 py-8 flex flex-wrap justify-center gap-x-10 gap-y-3 text-slate-400 font-semibold text-sm">
-    <span>React</span><span>Next.js</span><span>WordPress</span><span>Shopify</span><span>WooCommerce</span><span>Node.js</span><span>Laravel</span><span>Tailwind CSS</span>
+<!-- PROCESO -->
+<section id="proceso" class="process">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">02 — Cómo trabajamos</div>
+      <h2>Cinco pasos. <em class="it">Sin sorpresas a mitad de camino.</em></h2>
+      <p>Cada paso termina con algo que puedes ver y aprobar antes de pasar al siguiente.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><h3>Conversación</h3><p>Una llamada de 30 minutos o un café en Miraflores. Nos cuentas qué vendes, a quién y qué te falta hoy.</p><div class="t">Día 1</div></div>
+      <div class="step"><div class="n">2</div><h3>Propuesta escrita</h3><p>Qué incluye, qué no, cuánto cuesta y en qué fecha se entrega. Si algo no está en el documento, no lo cobramos después.</p><div class="t">Días 2–3</div></div>
+      <div class="step"><div class="n">3</div><h3>Diseño</h3><p>Te mostramos la página de inicio y una interna en tu celular. Dos rondas de cambios incluidas.</p><div class="t">Semana 1–2</div></div>
+      <div class="step"><div class="n">4</div><h3>Desarrollo</h3><p>Construimos sobre un enlace de prueba que puedes revisar cuando quieras. Te escribimos cada viernes con el avance.</p><div class="t">Semana 2–3</div></div>
+      <div class="step"><div class="n">5</div><h3>Publicación y ajustes</h3><p>Conectamos tu dominio, te enseñamos a editar y quedamos atentos 30 días para corregir lo que haga falta.</p><div class="t">Semana 4</div></div>
+    </div>
   </div>
 </section>
 
-<!-- Servicios -->
-<section id="servicios" class="py-20 lg:py-28">
-  <div class="max-w-7xl mx-auto px-5 lg:px-8">
-    <div class="max-w-2xl">
-      <p class="text-brand-600 font-semibold text-sm uppercase tracking-wider">Servicios</p>
-      <h2 class="mt-3 text-3xl sm:text-4xl font-bold text-ink">Todo lo que tu negocio necesita para vender en internet</h2>
-      <p class="mt-4 text-lg text-slate-500">Soluciones a medida, desde tu primera web hasta plataformas complejas.</p>
+<!-- TRABAJOS -->
+<section id="trabajos">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">03 — Trabajos</div>
+      <h2>Algunos proyectos <em class="it">recientes.</em></h2>
+      <p>Los nombres y detalles de abajo son de ejemplo, para que veas el tipo de trabajo que hacemos.</p>
     </div>
-    <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      <div class="group rounded-2xl border border-slate-200 p-7 hover:border-brand-400 hover:shadow-xl transition">
-        <div class="w-12 h-12 rounded-xl bg-brand-50 text-brand-600 grid place-items-center text-2xl">🏢</div>
-        <h3 class="mt-5 text-lg font-bold text-ink">Sitios web corporativos</h3>
-        <p class="mt-2 text-sm text-slate-500">Webs modernas que transmiten confianza, presentan tus servicios y generan contactos.</p>
-        <ul class="mt-4 space-y-1 text-sm text-slate-600"><li>✓ Diseño a medida</li><li>✓ 100% responsive</li><li>✓ Panel autoadministrable</li></ul>
-      </div>
-      <div class="group rounded-2xl border border-slate-200 p-7 hover:border-brand-400 hover:shadow-xl transition">
-        <div class="w-12 h-12 rounded-xl bg-brand-50 text-brand-600 grid place-items-center text-2xl">🛒</div>
-        <h3 class="mt-5 text-lg font-bold text-ink">E-commerce</h3>
-        <p class="mt-2 text-sm text-slate-500">Tiendas online listas para vender, con pasarelas de pago locales e internacionales.</p>
-        <ul class="mt-4 space-y-1 text-sm text-slate-600"><li>✓ Pagos con tarjeta, Yape/Plin*</li><li>✓ Gestión de inventario</li><li>✓ Integración con envíos</li></ul>
-      </div>
-      <div class="group rounded-2xl border border-slate-200 p-7 hover:border-brand-400 hover:shadow-xl transition">
-        <div class="w-12 h-12 rounded-xl bg-brand-50 text-brand-600 grid place-items-center text-2xl">⚙️</div>
-        <h3 class="mt-5 text-lg font-bold text-ink">Aplicaciones web</h3>
-        <p class="mt-2 text-sm text-slate-500">Sistemas a medida: portales de clientes, reservas, dashboards e integraciones vía API.</p>
-        <ul class="mt-4 space-y-1 text-sm text-slate-600"><li>✓ Arquitectura escalable</li><li>✓ Usuarios y roles</li><li>✓ Integraciones con tu ERP/CRM</li></ul>
-      </div>
-      <div class="group rounded-2xl border border-slate-200 p-7 hover:border-brand-400 hover:shadow-xl transition">
-        <div class="w-12 h-12 rounded-xl bg-brand-50 text-brand-600 grid place-items-center text-2xl">🚀</div>
-        <h3 class="mt-5 text-lg font-bold text-ink">Mantenimiento y SEO</h3>
-        <p class="mt-2 text-sm text-slate-500">Mantén tu web segura, rápida y bien posicionada en Google mes a mes.</p>
-        <ul class="mt-4 space-y-1 text-sm text-slate-600"><li>✓ Copias de seguridad</li><li>✓ Actualizaciones y soporte</li><li>✓ SEO técnico y reportes</li></ul>
-      </div>
+    <div class="work">
+      <article class="w1">
+        <div class="thumb">
+          <svg viewBox="0 0 640 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="640" height="400" fill="#E6DFD1"/><rect x="40" y="36" width="560" height="328" fill="#F7F4EE" stroke="#1B1A17"/><line x1="40" y1="66" x2="600" y2="66" stroke="#1B1A17"/><circle cx="58" cy="51" r="4" fill="#C8432B"/><rect x="72" y="100" width="260" height="22" fill="#1B1A17"/><rect x="72" y="132" width="200" height="22" fill="#1B1A17"/><rect x="72" y="176" width="220" height="6" fill="#9A9486"/><rect x="72" y="190" width="190" height="6" fill="#9A9486"/><rect x="72" y="222" width="110" height="30" fill="#C8432B"/><rect x="372" y="96" width="196" height="236" fill="#D9D1C1"/><path d="M372 290l60-70 50 45 40-30 46 55v42H372z" fill="#B9AF9C"/></svg>
+        </div>
+        <div class="cap"><div><h3>Clínica dental en Surco</h3><p>Web corporativa con reserva de citas por WhatsApp.</p></div><span class="tag">Proyecto de ejemplo</span></div>
+      </article>
+      <article class="w2">
+        <div class="thumb">
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="400" height="300" fill="#1B1A17"/><rect x="130" y="24" width="140" height="252" rx="14" fill="#F3EFE6"/><rect x="146" y="52" width="108" height="80" fill="#C8432B"/><rect x="146" y="144" width="70" height="7" fill="#1B1A17"/><rect x="146" y="158" width="48" height="7" fill="#9A9486"/><rect x="146" y="184" width="50" height="50" fill="#D9D1C1"/><rect x="204" y="184" width="50" height="50" fill="#D9D1C1"/><rect x="146" y="244" width="108" height="18" fill="#1B1A17"/></svg>
+        </div>
+        <div class="cap"><div><h3>Café de especialidad, Cusco</h3><p>Tienda online con envíos a todo el país.</p></div><span class="tag">Proyecto de ejemplo</span></div>
+      </article>
+      <article class="w3">
+        <div class="thumb">
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="400" height="300" fill="#D9D1C1"/><g stroke="#1B1A17" fill="none"><rect x="36" y="40" width="328" height="220" fill="#F7F4EE"/><line x1="120" y1="40" x2="120" y2="260"/></g><rect x="50" y="62" width="54" height="6" fill="#1B1A17"/><rect x="50" y="80" width="40" height="6" fill="#9A9486"/><rect x="50" y="96" width="46" height="6" fill="#9A9486"/><g fill="#1B1A17"><rect x="146" y="200" width="24" height="40"/><rect x="182" y="170" width="24" height="70"/><rect x="218" y="186" width="24" height="54"/></g><rect x="254" y="130" width="24" height="110" fill="#C8432B"/><rect x="290" y="150" width="24" height="90" fill="#1B1A17"/><rect x="146" y="64" width="120" height="10" fill="#1B1A17"/></svg>
+        </div>
+        <div class="cap"><div><h3>Distribuidora en Arequipa</h3><p>Sistema de pedidos para vendedores en ruta.</p></div><span class="tag">Proyecto de ejemplo</span></div>
+      </article>
+      <article class="w4">
+        <div class="thumb">
+          <svg viewBox="0 0 640 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="640" height="400" fill="#C8432B"/><rect x="60" y="50" width="520" height="300" fill="#F3EFE6"/><rect x="92" y="86" width="150" height="10" fill="#1B1A17"/><g fill="#D9D1C1"><rect x="92" y="120" width="140" height="100"/><rect x="250" y="120" width="140" height="100"/><rect x="408" y="120" width="140" height="100"/></g><g fill="#1B1A17"><rect x="92" y="232" width="90" height="7"/><rect x="250" y="232" width="110" height="7"/><rect x="408" y="232" width="80" height="7"/></g><g fill="#9A9486"><rect x="92" y="248" width="60" height="6"/><rect x="250" y="248" width="70" height="6"/><rect x="408" y="248" width="50" height="6"/></g><rect x="92" y="290" width="456" height="1" fill="#1B1A17"/></svg>
+        </div>
+        <div class="cap"><div><h3>Inmobiliaria en Trujillo</h3><p>Catálogo de departamentos con filtros y mantenimiento mensual.</p></div><span class="tag">Proyecto de ejemplo</span></div>
+      </article>
     </div>
-    <p class="mt-4 text-xs text-slate-400">*Métodos de pago sujetos a disponibilidad en tu país.</p>
   </div>
 </section>
 
-<!-- Proceso -->
-<section id="proceso" class="py-20 lg:py-28 bg-slate-50">
-  <div class="max-w-7xl mx-auto px-5 lg:px-8">
-    <div class="text-center max-w-2xl mx-auto">
-      <p class="text-brand-600 font-semibold text-sm uppercase tracking-wider">Cómo trabajamos</p>
-      <h2 class="mt-3 text-3xl sm:text-4xl font-bold text-ink">Un proceso claro, de la idea al lanzamiento</h2>
+<!-- POR QUÉ -->
+<section id="nosotros" class="rule-top">
+  <div class="wrap why-grid">
+    <div class="why-intro">
+      <div class="sec-num" style="padding:0">04 — Por qué nosotros</div>
+      <h2>Lo que nos dicen que valoran.</h2>
+      <p>No somos la opción más barata ni la agencia más grande. Somos las personas que contestan el teléfono.</p>
     </div>
-    <ol class="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-      <li class="relative rounded-2xl bg-white p-7 shadow-sm"><span class="text-5xl font-extrabold text-brand-100">01</span><h3 class="mt-2 text-lg font-bold text-ink">Descubrimiento</h3><p class="mt-2 text-sm text-slate-500">Conversamos sobre tus objetivos, público y competencia. Te enviamos una propuesta y cotización detallada.</p></li>
-      <li class="relative rounded-2xl bg-white p-7 shadow-sm"><span class="text-5xl font-extrabold text-brand-100">02</span><h3 class="mt-2 text-lg font-bold text-ink">Diseño</h3><p class="mt-2 text-sm text-slate-500">Creamos la estructura y el diseño visual. Lo revisas y ajustamos hasta que quede como lo imaginas.</p></li>
-      <li class="relative rounded-2xl bg-white p-7 shadow-sm"><span class="text-5xl font-extrabold text-brand-100">03</span><h3 class="mt-2 text-lg font-bold text-ink">Desarrollo</h3><p class="mt-2 text-sm text-slate-500">Programamos con buenas prácticas, pruebas en todos los dispositivos y avances semanales.</p></li>
-      <li class="relative rounded-2xl bg-white p-7 shadow-sm"><span class="text-5xl font-extrabold text-brand-100">04</span><h3 class="mt-2 text-lg font-bold text-ink">Lanzamiento y soporte</h3><p class="mt-2 text-sm text-slate-500">Publicamos tu proyecto, te capacitamos y te acompañamos con soporte post-lanzamiento.</p></li>
+    <ol class="why-list">
+      <li><div><h3>Hablas con quien hace el trabajo</h3><p>No hay ejecutivo de cuenta de por medio. El que diseña o programa tu web es el mismo que te responde.</p></div></li>
+      <li><div><h3>Precio cerrado por escrito</h3><p>Antes de empezar sabes el monto total. Los cambios fuera del alcance se cotizan aparte y tú decides si van.</p></div></li>
+      <li><div><h3>Todo queda a tu nombre</h3><p>Dominio, hosting, código y accesos. Si un día decides irte, te llevas todo sin pedir permiso.</p></div></li>
+      <li><div><h3>Pensado primero para celular</h3><p>La mayoría de tus clientes te va a ver desde el teléfono, con datos móviles. Diseñamos y probamos para eso.</p></div></li>
+      <li><div><h3>Emitimos factura</h3><p>Empresa formal con RUC. Útil si necesitas sustentar el gasto.</p></div></li>
     </ol>
   </div>
 </section>
 
-<!-- Proyectos -->
-<section id="proyectos" class="py-20 lg:py-28">
-  <div class="max-w-7xl mx-auto px-5 lg:px-8">
-    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-      <div class="max-w-2xl">
-        <p class="text-brand-600 font-semibold text-sm uppercase tracking-wider">Proyectos</p>
-        <h2 class="mt-3 text-3xl sm:text-4xl font-bold text-ink">Trabajos recientes</h2>
-        <p class="mt-2 text-sm text-slate-400">Proyectos de ejemplo (marcadores de posición).</p>
-      </div>
-      <a href="#contacto" class="text-brand-600 font-semibold hover:underline">¿Tu proyecto es el próximo? →</a>
+<!-- TESTIMONIOS -->
+<section id="testimonios" class="quote">
+  <div class="wrap q-grid">
+    <div class="q-main">
+      <div class="sec-num" style="padding:0 0 28px">05 — Lo que dicen</div>
+      <blockquote>“Antes nos escribían preguntando el horario y la dirección. Ahora nos escriben <span class="acc">para reservar.</span> Y yo mismo cambio las promociones desde el celular.”</blockquote>
+      <div class="who"><span>Carlos M., dueño de restaurante en Barranco</span><span class="tag">Cliente de ejemplo</span></div>
     </div>
-    <div class="mt-12 grid md:grid-cols-3 gap-6">
-      <article class="rounded-2xl overflow-hidden border border-slate-200 hover:shadow-xl transition">
-        <div class="h-52 bg-gradient-to-br from-indigo-500 to-purple-600 grid place-items-center text-white/90 font-bold text-xl">Proyecto de ejemplo A</div>
-        <div class="p-6"><span class="text-xs font-semibold text-brand-600 bg-brand-50 rounded-full px-2.5 py-1">E-commerce</span><h3 class="mt-3 font-bold text-ink">Tienda de moda online</h3><p class="mt-1 text-sm text-slate-500">Catálogo, pagos y envíos integrados. Carga en menos de 2 s.</p></div>
-      </article>
-      <article class="rounded-2xl overflow-hidden border border-slate-200 hover:shadow-xl transition">
-        <div class="h-52 bg-gradient-to-br from-cyan-500 to-blue-600 grid place-items-center text-white/90 font-bold text-xl">Proyecto de ejemplo B</div>
-        <div class="p-6"><span class="text-xs font-semibold text-brand-600 bg-brand-50 rounded-full px-2.5 py-1">Sitio corporativo</span><h3 class="mt-3 font-bold text-ink">Estudio de arquitectura</h3><p class="mt-1 text-sm text-slate-500">Web institucional con portafolio y formulario de captación.</p></div>
-      </article>
-      <article class="rounded-2xl overflow-hidden border border-slate-200 hover:shadow-xl transition">
-        <div class="h-52 bg-gradient-to-br from-emerald-500 to-teal-600 grid place-items-center text-white/90 font-bold text-xl">Proyecto de ejemplo C</div>
-        <div class="p-6"><span class="text-xs font-semibold text-brand-600 bg-brand-50 rounded-full px-2.5 py-1">Aplicación web</span><h3 class="mt-3 font-bold text-ink">Sistema de reservas</h3><p class="mt-1 text-sm text-slate-500">Agenda online, recordatorios y panel de administración.</p></div>
-      </article>
+    <div class="q-small">
+      <figure>
+        <blockquote>“Nos entregaron en la fecha que dijeron. Parece poco, pero con el proveedor anterior esperamos cuatro meses.”</blockquote>
+        <figcaption><span>Lucía R., estudio contable, San Isidro</span><span class="tag">Cliente de ejemplo</span></figcaption>
+      </figure>
+      <figure>
+        <blockquote>“Me explicaron todo sin tecnicismos. Ya vendemos por la web a provincias y el pago llega directo a la cuenta.”</blockquote>
+        <figcaption><span>Jorge P., tienda de repuestos, Lima Norte</span><span class="tag">Cliente de ejemplo</span></figcaption>
+      </figure>
     </div>
   </div>
 </section>
 
-<!-- Por qué elegirnos -->
-<section class="py-20 lg:py-28 bg-ink text-white relative overflow-hidden">
-  <div class="absolute inset-0 grid-bg opacity-60"></div>
-  <div class="relative max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-2 gap-14 items-center">
-    <div>
-      <p class="text-brand-400 font-semibold text-sm uppercase tracking-wider">¿Por qué elegirnos?</p>
-      <h2 class="mt-3 text-3xl sm:text-4xl font-bold">Tecnología de primer nivel, trato cercano</h2>
-      <p class="mt-4 text-slate-300 text-lg">Somos tu equipo digital: hablamos tu idioma, entendemos tu mercado y cumplimos los plazos.</p>
-      <a href="#contacto" class="mt-8 inline-flex rounded-xl bg-brand-500 hover:bg-brand-600 px-6 py-3.5 font-semibold">Hablemos de tu proyecto</a>
+<!-- PAQUETES -->
+<section id="paquetes">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">06 — Precios</div>
+      <h2>Precios de referencia, <em class="it">en soles.</em></h2>
+      <p>El monto final depende de lo que necesites, pero así te haces una idea antes de escribirnos.</p>
     </div>
-    <div class="grid sm:grid-cols-2 gap-5">
-      <div class="rounded-2xl bg-white/5 border border-white/10 p-6"><p class="text-2xl">⚡</p><h3 class="mt-3 font-bold">Velocidad y rendimiento</h3><p class="mt-1 text-sm text-slate-400">Sitios optimizados que cargan rápido y rankean mejor.</p></div>
-      <div class="rounded-2xl bg-white/5 border border-white/10 p-6"><p class="text-2xl">📱</p><h3 class="mt-3 font-bold">Pensado para móviles</h3><p class="mt-1 text-sm text-slate-400">Experiencia impecable en celular, tablet y escritorio.</p></div>
-      <div class="rounded-2xl bg-white/5 border border-white/10 p-6"><p class="text-2xl">🔒</p><h3 class="mt-3 font-bold">Seguridad incluida</h3><p class="mt-1 text-sm text-slate-400">SSL, copias de seguridad y buenas prácticas desde el día uno.</p></div>
-      <div class="rounded-2xl bg-white/5 border border-white/10 p-6"><p class="text-2xl">🤝</p><h3 class="mt-3 font-bold">Precio claro, sin sorpresas</h3><p class="mt-1 text-sm text-slate-400">Cotización detallada y comunicación directa por WhatsApp.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- Testimonios -->
-<section class="py-20 lg:py-28">
-  <div class="max-w-7xl mx-auto px-5 lg:px-8">
-    <div class="text-center max-w-2xl mx-auto">
-      <p class="text-brand-600 font-semibold text-sm uppercase tracking-wider">Testimonios</p>
-      <h2 class="mt-3 text-3xl sm:text-4xl font-bold text-ink">Lo que dicen nuestros clientes</h2>
-      <p class="mt-2 text-sm text-slate-400">Testimonios de ejemplo — reemplazar por reseñas reales.</p>
-    </div>
-    <div class="mt-12 grid md:grid-cols-3 gap-6">
-      <figure class="rounded-2xl border border-slate-200 p-7"><p class="text-amber-400">★★★★★</p><blockquote class="mt-3 text-slate-600">“Texto de ejemplo: el equipo entendió lo que necesitábamos y entregó una web rápida y fácil de administrar.”</blockquote><figcaption class="mt-5 flex items-center gap-3"><span class="w-10 h-10 rounded-full bg-brand-100 text-brand-700 grid place-items-center font-bold">C1</span><div><p class="font-semibold text-ink">Cliente de ejemplo 1</p><p class="text-xs text-slate-400">Empresa de servicios (ficticia)</p></div></figcaption></figure>
-      <figure class="rounded-2xl border border-slate-200 p-7"><p class="text-amber-400">★★★★★</p><blockquote class="mt-3 text-slate-600">“Texto de ejemplo: nuestra tienda online empezó a recibir pedidos desde la primera semana.”</blockquote><figcaption class="mt-5 flex items-center gap-3"><span class="w-10 h-10 rounded-full bg-cyan-100 text-cyan-700 grid place-items-center font-bold">C2</span><div><p class="font-semibold text-ink">Cliente de ejemplo 2</p><p class="text-xs text-slate-400">Tienda online (ficticia)</p></div></figcaption></figure>
-      <figure class="rounded-2xl border border-slate-200 p-7"><p class="text-amber-400">★★★★★</p><blockquote class="mt-3 text-slate-600">“Texto de ejemplo: el sistema a medida nos ahorró horas de trabajo manual cada semana.”</blockquote><figcaption class="mt-5 flex items-center gap-3"><span class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-700 grid place-items-center font-bold">C3</span><div><p class="font-semibold text-ink">Cliente de ejemplo 3</p><p class="text-xs text-slate-400">Clínica (ficticia)</p></div></figcaption></figure>
-    </div>
-  </div>
-</section>
-
-<!-- Planes -->
-<section id="planes" class="py-20 lg:py-28 bg-slate-50">
-  <div class="max-w-7xl mx-auto px-5 lg:px-8">
-    <div class="text-center max-w-2xl mx-auto">
-      <p class="text-brand-600 font-semibold text-sm uppercase tracking-wider">Planes</p>
-      <h2 class="mt-3 text-3xl sm:text-4xl font-bold text-ink">Paquetes pensados para cada etapa</h2>
-      <p class="mt-2 text-sm text-slate-400">Precios referenciales de ejemplo. Cada proyecto se cotiza a medida.</p>
-    </div>
-    <div class="mt-12 grid md:grid-cols-3 gap-6 items-stretch">
-      <div class="rounded-2xl bg-white border border-slate-200 p-8 flex flex-col">
-        <h3 class="font-bold text-ink text-lg">Emprendedor</h3><p class="text-sm text-slate-500 mt-1">Ideal para empezar tu presencia online.</p>
-        <p class="mt-6"><span class="text-sm text-slate-500">desde</span> <span class="text-4xl font-extrabold text-ink">S/ 1,500</span></p>
-        <ul class="mt-6 space-y-2 text-sm text-slate-600 flex-1"><li>✓ Landing page o web de hasta 5 secciones</li><li>✓ Diseño responsive</li><li>✓ Formulario y WhatsApp</li><li>✓ SEO básico</li></ul>
-        <a href="#contacto" class="mt-8 text-center rounded-xl border border-slate-300 hover:border-brand-500 hover:text-brand-600 py-3 font-semibold">Cotizar</a>
-      </div>
-      <div class="rounded-2xl bg-ink text-white p-8 flex flex-col ring-2 ring-brand-500 relative md:-translate-y-3 shadow-2xl">
-        <span class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-brand-500 text-xs font-semibold px-3 py-1">Más elegido</span>
-        <h3 class="font-bold text-lg">Empresa</h3><p class="text-sm text-slate-400 mt-1">Web corporativa completa y autoadministrable.</p>
-        <p class="mt-6"><span class="text-sm text-slate-400">desde</span> <span class="text-4xl font-extrabold">S/ 3,900</span></p>
-        <ul class="mt-6 space-y-2 text-sm text-slate-300 flex-1"><li>✓ Hasta 10 páginas + blog</li><li>✓ Panel de administración</li><li>✓ SEO on-page y analítica</li><li>✓ 3 meses de soporte</li></ul>
-        <a href="#contacto" class="mt-8 text-center rounded-xl bg-brand-500 hover:bg-brand-600 py-3 font-semibold">Solicita una cotización</a>
-      </div>
-      <div class="rounded-2xl bg-white border border-slate-200 p-8 flex flex-col">
-        <h3 class="font-bold text-ink text-lg">E-commerce / A medida</h3><p class="text-sm text-slate-500 mt-1">Tiendas online y aplicaciones web.</p>
-        <p class="mt-6"><span class="text-4xl font-extrabold text-ink">A cotizar</span></p>
-        <ul class="mt-6 space-y-2 text-sm text-slate-600 flex-1"><li>✓ Tienda o sistema a medida</li><li>✓ Pasarelas de pago</li><li>✓ Integraciones y API</li><li>✓ Soporte prioritario</li></ul>
-        <a href="#contacto" class="mt-8 text-center rounded-xl border border-slate-300 hover:border-brand-500 hover:text-brand-600 py-3 font-semibold">Conversemos</a>
-      </div>
-    </div>
+    <dl class="pk-m">
+      <div><dt>Básico</dt><dd>S/ 1,800</dd></div>
+      <div class="hlm"><dt>Negocio <span class="rec">El más pedido</span></dt><dd>S/ 3,200</dd></div>
+      <div><dt>Tienda</dt><dd>S/ 4,500</dd></div>
+    </dl>
+    <table class="pk">
+      <thead>
+        <tr>
+          <th></th>
+          <th><span class="rec" style="visibility:hidden">·</span><span class="name">Básico</span><span class="p"><b>S/ 1,800</b> · pago único</span></th>
+          <th class="hl"><span class="rec">El más pedido</span><span class="name">Negocio</span><span class="p"><b>S/ 3,200</b> · pago único</span></th>
+          <th><span class="rec" style="visibility:hidden">·</span><span class="name">Tienda</span><span class="p"><b>S/ 4,500</b> · pago único</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th>Para quién</th><td data-p="Básico">Emprendimiento que recién sale a internet</td><td data-p="Negocio" class="hl">Empresa de servicios con varias líneas</td><td data-p="Tienda">Negocio que quiere vender en línea</td></tr>
+        <tr><th>Secciones</th><td data-p="Básico">Hasta 4</td><td data-p="Negocio" class="hl">Hasta 8 + blog</td><td data-p="Tienda">Catálogo ilimitado</td></tr>
+        <tr><th>Plazo</th><td data-p="Básico">2 semanas</td><td data-p="Negocio" class="hl">3 a 4 semanas</td><td data-p="Tienda">4 a 7 semanas</td></tr>
+        <tr><th>Editable por ti</th><td data-p="Básico">Textos y fotos</td><td data-p="Negocio" class="hl">Todo el contenido</td><td data-p="Tienda">Productos, precios y stock</td></tr>
+        <tr><th>SEO inicial</th><td data-p="Básico">Básico + Google Maps</td><td data-p="Negocio" class="hl">Completo por sección</td><td data-p="Tienda">Completo + fichas de producto</td></tr>
+        <tr><th>Dominio y hosting</th><td data-p="Básico">1er año incluido</td><td data-p="Negocio" class="hl">1er año incluido</td><td data-p="Tienda">1er año incluido</td></tr>
+      </tbody>
+      <tfoot>
+        <tr><th></th>
+          <td><a href="#contacto" class="btn btn-ghost">Cotizar Básico <span class="arr">→</span></a></td>
+          <td class="hl"><a href="#contacto" class="btn">Cotizar Negocio <span class="arr">→</span></a></td>
+          <td><a href="#contacto" class="btn btn-ghost">Cotizar Tienda <span class="arr">→</span></a></td>
+        </tr>
+      </tfoot>
+    </table>
+    <p class="pk-note">Precios referenciales, no incluyen IGV. Aplicaciones web a medida se cotizan por separado (desde S/ 9,000). Mantenimiento opcional: S/ 250 al mes.</p>
   </div>
 </section>
 
 <!-- FAQ -->
-<section id="faq" class="py-20 lg:py-28">
-  <div class="max-w-3xl mx-auto px-5 lg:px-8">
-    <div class="text-center">
-      <p class="text-brand-600 font-semibold text-sm uppercase tracking-wider">Preguntas frecuentes</p>
-      <h2 class="mt-3 text-3xl sm:text-4xl font-bold text-ink">¿Tienes dudas? Te respondemos</h2>
+<section id="faq" class="rule-top">
+  <div class="wrap faq-grid">
+    <div class="sec-num">07 — Preguntas</div>
+    <div class="faq-side">
+      <h2>Lo que casi todos preguntan.</h2>
+      <p>¿Tienes otra duda? Escríbenos por <a class="link" href="#contacto">WhatsApp</a>, contestamos rápido.</p>
     </div>
-    <div class="mt-12 divide-y divide-slate-200 border-y border-slate-200">
-      <details class="group py-5"><summary class="flex justify-between items-center cursor-pointer font-semibold text-ink">¿Cuánto tiempo toma desarrollar mi web?<span class="chev text-2xl text-brand-500 transition">+</span></summary><p class="mt-3 text-slate-500">Una web corporativa suele tomar entre 2 y 4 semanas; una tienda online o aplicación, entre 4 y 10 semanas, según el alcance.</p></details>
-      <details class="group py-5"><summary class="flex justify-between items-center cursor-pointer font-semibold text-ink">¿Podré editar el contenido yo mismo?<span class="chev text-2xl text-brand-500 transition">+</span></summary><p class="mt-3 text-slate-500">Sí. Entregamos un panel autoadministrable y una capacitación para que actualices textos, imágenes y productos.</p></details>
-      <details class="group py-5"><summary class="flex justify-between items-center cursor-pointer font-semibold text-ink">¿Incluye dominio y hosting?<span class="chev text-2xl text-brand-500 transition">+</span></summary><p class="mt-3 text-slate-500">Te asesoramos para elegirlos y podemos gestionarlos por ti. El primer año puede incluirse según el plan.</p></details>
-      <details class="group py-5"><summary class="flex justify-between items-center cursor-pointer font-semibold text-ink">¿Cómo son las formas de pago?<span class="chev text-2xl text-brand-500 transition">+</span></summary><p class="mt-3 text-slate-500">Normalmente 50% al iniciar y 50% al entregar. Para proyectos grandes, pagos por hitos.</p></details>
-      <details class="group py-5"><summary class="flex justify-between items-center cursor-pointer font-semibold text-ink">¿Qué pasa después del lanzamiento?<span class="chev text-2xl text-brand-500 transition">+</span></summary><p class="mt-3 text-slate-500">Incluimos un periodo de soporte y ofrecemos planes de mantenimiento y SEO mensuales para mantener tu web al día.</p></details>
+    <div class="faq-list">
+      <details open><summary>¿Cuánto demora una página web? <span class="pm">+</span></summary><p>Una web corporativa sencilla, entre 2 y 4 semanas. Una tienda online, entre 4 y 7. El plazo real depende mucho de qué tan rápido nos envíes textos y fotos; te ayudamos con eso si hace falta.</p></details>
+      <details><summary>¿Tengo que pagar todo por adelantado? <span class="pm">+</span></summary><p>No. Pedimos el 50% para empezar y el otro 50% cuando la web está lista para publicarse y tú la aprobaste.</p></details>
+      <details><summary>¿Puedo actualizar la web yo mismo? <span class="pm">+</span></summary><p>Sí. Te dejamos un panel sencillo y una capacitación grabada. Cambiar un texto, una foto o un precio toma un par de minutos.</p></details>
+      <details><summary>No tengo dominio ni hosting, ¿qué hago? <span class="pm">+</span></summary><p>Nos encargamos. El primer año está incluido en los paquetes y queda registrado a tu nombre, no al nuestro.</p></details>
+      <details><summary>¿Qué pasa si después quiero más cambios? <span class="pm">+</span></summary><p>Los primeros 30 días, los ajustes son gratis. Después puedes tomar el mantenimiento mensual o pedirnos cambios puntuales con cotización previa.</p></details>
+      <details><summary>¿Trabajan con clientes fuera de Lima? <span class="pm">+</span></summary><p>Sí, la mayoría de reuniones son por videollamada. Tenemos clientes en Arequipa, Cusco, Trujillo y Piura.</p></details>
     </div>
   </div>
 </section>
 
-<!-- Contacto -->
-<section id="contacto" class="py-20 lg:py-28 bg-gradient-to-br from-brand-600 to-indigo-900 text-white">
-  <div class="max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-2 gap-14">
-    <div>
-      <h2 class="text-3xl sm:text-4xl font-bold">¿Listo para llevar tu negocio al siguiente nivel?</h2>
-      <p class="mt-4 text-lg text-brand-100">Cuéntanos tu idea y recibe una cotización sin compromiso en menos de 24 horas.</p>
-      <ul class="mt-8 space-y-4 text-brand-100">
-        <li class="flex gap-3"><span>📧</span> hola@ejemplo.com <span class="text-xs opacity-70">(marcador)</span></li>
-        <li class="flex gap-3"><span>💬</span> WhatsApp: +51 900 000 000 <span class="text-xs opacity-70">(marcador)</span></li>
-        <li class="flex gap-3"><span>📍</span> Lima, Perú · Atendemos en toda Latinoamérica</li>
-      </ul>
+<!-- CONTACTO -->
+<section id="contacto" class="contact">
+  <div class="wrap c-grid">
+    <div class="c-info">
+      <div class="sec-num" style="padding:0">08 — Contacto</div>
+      <h2>Cuéntanos qué <em class="it">necesitas.</em></h2>
+      <p>Con tres o cuatro datos te enviamos una cotización por escrito. Sin compromiso y sin llamadas insistentes.</p>
+      <div class="c-direct">
+        <div><span>Correo</span><a class="link" href="mailto:hola@ejemplo.com">hola@ejemplo.com</a></div>
+        <div><span>WhatsApp</span><a class="link" href="https://wa.me/51900000000">+51 900 000 000</a></div>
+        <div><span>Horario</span><span>Lun a vie, 9:00 a 18:00</span></div>
+      </div>
     </div>
-    <form class="rounded-2xl bg-white text-ink p-7 sm:p-8 shadow-2xl space-y-4" onsubmit="event.preventDefault();this.querySelector('[data-ok]').classList.remove('hidden')">
-      <div class="grid sm:grid-cols-2 gap-4">
-        <label class="block"><span class="text-sm font-medium">Nombre</span><input required class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="Tu nombre" /></label>
-        <label class="block"><span class="text-sm font-medium">Correo</span><input required type="email" class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="tu@correo.com" /></label>
-      </div>
-      <div class="grid sm:grid-cols-2 gap-4">
-        <label class="block"><span class="text-sm font-medium">Teléfono / WhatsApp</span><input class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="+51 ..." /></label>
-        <label class="block"><span class="text-sm font-medium">Servicio</span><select class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500"><option>Sitio web corporativo</option><option>E-commerce</option><option>Aplicación web</option><option>Mantenimiento / SEO</option><option>Otro</option></select></label>
-      </div>
-      <label class="block"><span class="text-sm font-medium">Cuéntanos sobre tu proyecto</span><textarea rows="4" class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="Objetivos, plazos, presupuesto aproximado..."></textarea></label>
-      <button class="w-full rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3.5">Solicita una cotización</button>
-      <p data-ok class="hidden text-sm text-emerald-600 text-center">¡Gracias! (Demo: el formulario aún no envía datos.)</p>
-      <p class="text-xs text-slate-400 text-center">Respondemos en menos de 24 horas hábiles.</p>
+    <form id="form" novalidate>
+      <div class="f"><label for="nombre">Nombre</label><input id="nombre" name="nombre" required autocomplete="name"></div>
+      <div class="f"><label for="empresa">Negocio o empresa</label><input id="empresa" name="empresa" autocomplete="organization"></div>
+      <div class="f"><label for="email">Correo</label><input id="email" type="email" name="email" required autocomplete="email"></div>
+      <div class="f"><label for="tel">WhatsApp</label><input id="tel" type="tel" name="tel" placeholder="9XX XXX XXX" autocomplete="tel"></div>
+      <div class="f"><label for="servicio">¿Qué necesitas?</label>
+        <select id="servicio" name="servicio"><option>Web corporativa</option><option>Tienda online</option><option>Aplicación web</option><option>Mantenimiento y SEO</option><option>Todavía no lo sé</option></select></div>
+      <div class="f"><label for="presupuesto">Presupuesto aproximado</label>
+        <select id="presupuesto" name="presupuesto"><option>Menos de S/ 2,000</option><option>S/ 2,000 – 5,000</option><option>S/ 5,000 – 10,000</option><option>Más de S/ 10,000</option></select></div>
+      <div class="f full"><label for="msg">Cuéntanos un poco</label><textarea id="msg" name="msg" placeholder="A qué se dedica tu negocio, si ya tienes web, para cuándo la necesitas…"></textarea></div>
+      <div class="ok" id="ok" role="status">Gracias. Este formulario es una demostración y no envía datos; en la versión final aquí llegaría tu mensaje.</div>
+      <div class="f-foot"><small>Formulario de demostración: por ahora no envía información.</small><button type="submit" class="btn">Solicita una cotización <span class="arr">→</span></button></div>
     </form>
   </div>
 </section>
+</main>
 
-<!-- Footer -->
-<footer class="bg-ink text-slate-400">
-  <div class="max-w-7xl mx-auto px-5 lg:px-8 py-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-10 text-sm">
-    <div>
-      <a href="#" class="flex items-center gap-2 text-white font-bold text-lg"><span class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-500 to-cyan-400 grid place-items-center text-sm">&lt;/&gt;</span>NovaCode<span class="text-brand-400">Studio</span></a>
-      <p class="mt-4">Desarrollo web profesional para empresas y emprendedores.</p>
+<footer>
+  <div class="wrap">
+    <div class="ft">
+      <div class="ft-brand">
+        <a href="#top" class="logo"><span class="dot"></span><b>NovaCode</b> Studio</a>
+        <p>Desarrollo web para negocios peruanos. Lima, Perú.</p>
+      </div>
+      <div class="ft-col"><h4>Servicios</h4><a href="#servicios">Webs corporativas</a><a href="#servicios">Tiendas online</a><a href="#servicios">Aplicaciones web</a><a href="#servicios">Mantenimiento y SEO</a></div>
+      <div class="ft-col"><h4>Estudio</h4><a href="#proceso">Cómo trabajamos</a><a href="#trabajos">Trabajos</a><a href="#paquetes">Precios</a><a href="#faq">Preguntas</a></div>
+      <div class="ft-col"><h4>Contacto</h4><a href="mailto:hola@ejemplo.com">hola@ejemplo.com</a><a href="https://wa.me/51900000000">+51 900 000 000</a></div>
     </div>
-    <div><h4 class="text-white font-semibold">Servicios</h4><ul class="mt-4 space-y-2"><li>Sitios corporativos</li><li>E-commerce</li><li>Aplicaciones web</li><li>Mantenimiento y SEO</li></ul></div>
-    <div><h4 class="text-white font-semibold">Empresa</h4><ul class="mt-4 space-y-2"><li><a href="#proceso" class="hover:text-white">Proceso</a></li><li><a href="#proyectos" class="hover:text-white">Proyectos</a></li><li><a href="#planes" class="hover:text-white">Planes</a></li><li><a href="#faq" class="hover:text-white">Preguntas frecuentes</a></li></ul></div>
-    <div><h4 class="text-white font-semibold">Contacto</h4><ul class="mt-4 space-y-2"><li>hola@ejemplo.com</li><li>+51 900 000 000</li><li>Lima, Perú</li></ul></div>
+    <div class="ft-bottom">
+      <span>© 2026 NovaCode Studio</span>
+      <span class="note">Nota: sitio de muestra. La marca, los proyectos, los testimonios, el correo, el teléfono y los precios son ejemplos referenciales.</span>
+    </div>
   </div>
-  <div class="border-t border-white/10"><div class="max-w-7xl mx-auto px-5 lg:px-8 py-6 flex flex-col sm:flex-row justify-between gap-2 text-xs"><p>© 2026 NovaCode Studio (nombre de marcador). Todos los derechos reservados.</p><p>Política de privacidad · Términos</p></div></div>
 </footer>
 
 <script>
-document.getElementById('menuBtn').addEventListener('click',()=>document.getElementById('mobileNav').classList.toggle('hidden'));
+const b=document.getElementById('menuBtn'),m=document.getElementById('mobileNav');
+b.addEventListener('click',()=>{const o=m.classList.toggle('open');b.setAttribute('aria-expanded',o);b.textContent=o?'Cerrar':'Menú'});
+m.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{m.classList.remove('open');b.setAttribute('aria-expanded','false');b.textContent='Menú'}));
+document.getElementById('form').addEventListener('submit',e=>{e.preventDefault();document.getElementById('ok').classList.add('show');e.target.reset()});
 </script>
 </body>
 </html>
