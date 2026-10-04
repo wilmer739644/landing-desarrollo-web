@@ -1,0 +1,177 @@
+name: RepoPilot Validate
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: repopilot-validate-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Typecheck and build
+    if: startsWith(github.head_ref, 'repopilot/change-')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout change
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Validate project
+        id: validate
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          LOG="$RUNNER_TEMP/repopilot-validation.log"
+          : > "$LOG"
+          exec > >(tee -a "$LOG") 2>&1
+
+          echo "== RepoPilot validation =="
+          echo "Head SHA: ${{ github.event.pull_request.head.sha }}"
+
+          BASE_SHA="${{ github.event.pull_request.base.sha }}"
+          HEAD_SHA="${{ github.event.pull_request.head.sha }}"
+          git fetch --no-tags --depth=1 origin "$BASE_SHA" || true
+          CHANGED_FILES="$(git diff --name-only "$BASE_SHA" "$HEAD_SHA" || true)"
+          printf '%s\n' "$CHANGED_FILES"
+
+          DOCS_ONLY=true
+          NEED_TYPECHECK=false
+          while IFS= read -r changed; do
+            [ -z "$changed" ] && continue
+            case "$changed" in
+              *.md|*.mdx|*.txt|docs/*) ;;
+              *) DOCS_ONLY=false ;;
+            esac
+            case "$changed" in
+              *.ts|*.tsx|*.js|*.jsx|*.mjs|*.cjs|tsconfig*.json|vite.config.*|package.json)
+                NEED_TYPECHECK=true
+                ;;
+            esac
+          done <<< "$CHANGED_FILES"
+
+          if [ "$DOCS_ONLY" = true ]; then
+            echo "RepoPilot adaptive validation: documentation-only change; build/typecheck skipped."
+            exit 0
+          fi
+
+          if [ -f bun.lock ] || [ -f bun.lockb ]; then
+            bun install --frozen-lockfile
+          elif [ -f pnpm-lock.yaml ]; then
+            corepack enable
+            pnpm install --frozen-lockfile
+          elif [ -f yarn.lock ]; then
+            corepack enable
+            yarn install --immutable || yarn install --frozen-lockfile
+          elif [ -f package-lock.json ]; then
+            npm ci
+          elif [ -f package.json ]; then
+            npm install
+          fi
+
+          # Build first. Frameworks such as TanStack Router generate typed
+          # route manifests during the build/dev pipeline.
+          if [ -f package.json ] && node -e "const p=require('./package.json'); process.exit(p.scripts&&p.scripts.build?0:1)"; then
+            if [ -f bun.lock ] || [ -f bun.lockb ]; then
+              bun run build
+            elif [ -f pnpm-lock.yaml ]; then
+              pnpm run build
+            elif [ -f yarn.lock ]; then
+              yarn build
+            else
+              npm run build
+            fi
+          fi
+
+          if [ "$NEED_TYPECHECK" = true ] && [ -f tsconfig.json ]; then
+            if [ -f bun.lock ] || [ -f bun.lockb ]; then
+              bunx tsc --noEmit
+            else
+              npx tsc --noEmit
+            fi
+          else
+            echo "RepoPilot adaptive validation: standalone typecheck not required."
+          fi
+
+      - name: Report validation to RepoPilot
+        if: always()
+        uses: actions/github-script@v7
+        env:
+          VALIDATION_OUTCOME: ${{ steps.validate.outcome }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          LOG_PATH: ${{ runner.temp }}/repopilot-validation.log
+        with:
+          script: |
+            const fs = require('fs');
+            const prNumber = Number(process.env.PR_NUMBER);
+            const sha = process.env.HEAD_SHA;
+            const status = process.env.VALIDATION_OUTCOME === 'success' ? 'success' : 'failure';
+            const runUrl = process.env.RUN_URL;
+
+            let diagnostics = '';
+            try {
+              diagnostics = fs.readFileSync(process.env.LOG_PATH, 'utf8');
+            } catch {}
+
+            diagnostics = diagnostics.slice(-18000);
+            const marker = {
+              sha,
+              status,
+              run_id: String(context.runId),
+              run_url: runUrl,
+              diagnostics_b64: Buffer.from(diagnostics, 'utf8').toString('base64'),
+              reported_at: new Date().toISOString()
+            };
+
+            const begin = '<!-- REPOPILOT_VALIDATION_BEGIN';
+            const end = 'REPOPILOT_VALIDATION_END -->';
+            const block = begin + '
+' + JSON.stringify(marker) + '
+' + end;
+
+            const { data: pr } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: prNumber
+            });
+
+            const currentBody = pr.body || '';
+            const pattern = /<!-- REPOPILOT_VALIDATION_BEGIN[sS]*?REPOPILOT_VALIDATION_END -->/m;
+            const nextBody = pattern.test(currentBody)
+              ? currentBody.replace(pattern, block)
+              : currentBody.trimEnd() + '
+
+' + block;
+
+            await github.rest.pulls.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: prNumber,
+              body: nextBody
+            });
+
+      - name: Fail workflow when validation failed
+        if: steps.validate.outcome != 'success'
+        shell: bash
+        run: exit 1
